@@ -1,5 +1,10 @@
 {
   "main": "node_modules/expo/AppEntry.js",
+  "husky": {
+   "hooks": {
+    "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
+   }
+  },
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -16,7 +21,9 @@
     "react-native-web": "~0.13.12"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.0"
+    "@babel/core": "^7.9.0",
+    "commitizen": "^4.2.3",
+    "husky": "^6.0.0"
   },
   "private": true
 }
