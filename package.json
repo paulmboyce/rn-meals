@@ -2,7 +2,7 @@
   "main": "node_modules/expo/AppEntry.js",
   "husky": {
    "hooks": {
-    "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
+    "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
    }
   },
   "scripts": {
