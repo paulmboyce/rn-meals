@@ -1,11 +1,7 @@
 {
   "main": "node_modules/expo/AppEntry.js",
-  "husky": {
-   "hooks": {
-    "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
-   }
-  },
   "scripts": {
+    "prepare": "husky install",
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
