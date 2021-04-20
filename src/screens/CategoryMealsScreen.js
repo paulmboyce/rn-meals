@@ -9,6 +9,7 @@ const CategoryMealsScreen = ({ navigation }) => {
 				title="View Meal Details"
 				onPress={() => navigation.navigate({ routeName: "MealDetail" })}
 			/>
+			<Button title="Go Back" onPress={() => navigation.goBack()} />
 		</View>
 	);
 };

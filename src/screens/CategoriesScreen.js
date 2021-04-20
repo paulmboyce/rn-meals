@@ -1,11 +1,10 @@
 import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
-import MealsNavigator from "../navigation/MealsNavigator";
 
 const CategoriesScreen = ({ navigation }) => {
 	return (
 		<View style={styles.screen}>
-			<Text style={styles.text}>This is the CategoriesScreen</Text>
+			<Text style={styles.text}>This is the HOME / CategoriesScreen</Text>
 			<Button
 				title="Go to Meals"
 				onPress={() => {
