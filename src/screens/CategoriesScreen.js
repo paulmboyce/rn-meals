@@ -52,12 +52,6 @@ const CategoriesScreen = ({ navigation }) => {
 
 	return (
 		<View style={ThemeStyles.screen}>
-			<Button
-				title="Go to Meals"
-				onPress={() => {
-					navigation.navigate({ routeName: "CategoryMeals" });
-				}}
-			/>
 			<FlatList
 				data={CATEGORIES}
 				renderItem={renderCategory}

@@ -6,7 +6,11 @@ const CATEGORIES = [
 ];
 
 const getCategory = (categoryId) => {
-	return CATEGORIES.find((item) => item.categoryId === categoryId);
+	const category = CATEGORIES.find((item) => item.categoryId === categoryId);
+	if (category === undefined) {
+		throw Error("Oops! Could not fnd category for categoryId: ", categoryId);
+	}
+	return category;
 };
 
 export { CATEGORIES, getCategory };
