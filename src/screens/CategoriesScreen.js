@@ -11,7 +11,6 @@ import {
 
 import { ThemeStyles, Theme } from "../styles/Theme";
 import { CATEGORIES } from "../data/categories";
-import getNavigationOptions from "../navigation/NavigationOptions";
 
 const CategoriesScreen = ({ navigation }) => {
 	const window = useWindowDimensions();
@@ -70,7 +69,6 @@ const CategoriesScreen = ({ navigation }) => {
 };
 
 CategoriesScreen.navigationOptions = {
-	...getNavigationOptions(),
 	title: "Meals App: Categories",
 };
 export default CategoriesScreen;

@@ -2,7 +2,6 @@ import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 
 import { ThemeStyles } from "../styles/Theme";
-import getNavigationOptions from "../navigation/NavigationOptions";
 import { getCategory } from "../data/categories";
 
 const CategoryMealsScreen = ({ navigation }) => {
@@ -34,7 +33,6 @@ CategoryMealsScreen.navigationOptions = (navProps) => {
 	const category = getCategory(catId);
 
 	return {
-		...getNavigationOptions(),
 		title: category.name,
 	};
 };

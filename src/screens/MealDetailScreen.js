@@ -2,7 +2,6 @@ import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 
 import { ThemeStyles } from "../styles/Theme";
-import getNavigationOptions from "../navigation/NavigationOptions";
 import { getCategory } from "../data/categories";
 
 const MealDetailScreen = ({ navigation }) => {
@@ -18,7 +17,6 @@ const MealDetailScreen = ({ navigation }) => {
 const styles = StyleSheet.create({});
 
 MealDetailScreen.navigationOptions = {
-	...getNavigationOptions(),
 	title: "Meal Details",
 };
 export default MealDetailScreen;
