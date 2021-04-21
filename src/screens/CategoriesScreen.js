@@ -9,7 +9,7 @@ import {
 	TouchableOpacity,
 } from "react-native";
 
-import { ThemeStyles } from "../styles/Theme";
+import { ThemeStyles, Theme } from "../styles/Theme";
 import CATEGORIES from "../data/categories";
 import getNavigationOptions from "../navigation/NavigationOptions";
 
@@ -17,16 +17,11 @@ const CategoriesScreen = ({ navigation }) => {
 	const window = useWindowDimensions();
 
 	const styles = StyleSheet.create({
-		screen: {
-			flex: 1,
-			justifyContent: "center",
-			alignItems: "center",
-		},
 		category: {
 			flex: 1,
 			minHeight: 80,
 			margin: 15,
-			borderColor: "black",
+			borderColor: Theme.primaryColor,
 			borderWidth: 1,
 			borderRadius: 5,
 			padding: 10,
@@ -53,7 +48,7 @@ const CategoriesScreen = ({ navigation }) => {
 	};
 
 	return (
-		<View style={styles.screen}>
+		<View style={ThemeStyles.screen}>
 			<Button
 				title="Go to Meals"
 				onPress={() => {

@@ -6,18 +6,13 @@ import getNavigationOptions from "../navigation/NavigationOptions";
 
 const MealDetailScreen = ({ navigation }) => {
 	return (
-		<View style={styles.screen}>
+		<View style={ThemeStyles.screen}>
 			<Button title="Go Home" onPress={() => navigation.popToTop()} />
 		</View>
 	);
 };
 
 const styles = StyleSheet.create({
-	screen: {
-		flex: 1,
-		justifyContent: "center",
-		alignItems: "center",
-	},
 	text: {
 		fontFamily: "OpenSans",
 	},

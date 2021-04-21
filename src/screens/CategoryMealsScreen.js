@@ -6,7 +6,7 @@ import getNavigationOptions from "../navigation/NavigationOptions";
 
 const CategoryMealsScreen = ({ navigation }) => {
 	return (
-		<View style={styles.screen}>
+		<View style={ThemeStyles.screen}>
 			<Button
 				title="View Meal Details"
 				onPress={() => navigation.navigate({ routeName: "MealDetail" })}
@@ -17,11 +17,6 @@ const CategoryMealsScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-	screen: {
-		flex: 1,
-		justifyContent: "center",
-		alignItems: "center",
-	},
 	text: {
 		fontFamily: "OpenSans",
 	},

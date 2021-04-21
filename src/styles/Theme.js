@@ -14,6 +14,12 @@ const Theme = {
 };
 
 const ThemeStyles = StyleSheet.create({
+	screen: {
+		flex: 1,
+		justifyContent: "center",
+		alignItems: "center",
+		backgroundColor: Theme.backgroundColor,
+	},
 	navigationHeaderStyleIOS: {},
 	navigationHeaderStyleAndroid: {
 		backgroundColor: Theme.headerBackgroundColor,
