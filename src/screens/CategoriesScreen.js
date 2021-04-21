@@ -10,7 +10,7 @@ import {
 } from "react-native";
 
 import { ThemeStyles, Theme } from "../styles/Theme";
-import CATEGORIES from "../data/categories";
+import { CATEGORIES } from "../data/categories";
 import getNavigationOptions from "../navigation/NavigationOptions";
 
 const CategoriesScreen = ({ navigation }) => {

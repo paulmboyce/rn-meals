@@ -3,21 +3,25 @@ import { View, Text, StyleSheet, Button } from "react-native";
 
 import { ThemeStyles } from "../styles/Theme";
 import getNavigationOptions from "../navigation/NavigationOptions";
-import CATEGORIES from "../data/categories";
-
-const getCategory = (categoryId) => {
-	return CATEGORIES.find((item) => item.categoryId === categoryId);
-};
+import { getCategory } from "../data/categories";
 
 const CategoryMealsScreen = ({ navigation }) => {
-	const category = getCategory(navigation.getParam("categoryId"));
-
+	const catId = navigation.getParam("categoryId");
+	const category = getCategory(catId);
+	console.log("CATEGORY: ", category);
 	return (
 		<View style={ThemeStyles.screen}>
 			<Text style={ThemeStyles.textTitle}>{category.name}</Text>
 			<Button
 				title="View Meal Details"
-				onPress={() => navigation.navigate({ routeName: "MealDetail" })}
+				onPress={() =>
+					navigation.navigate({
+						routeName: "MealDetail",
+						params: {
+							categoryId: catId,
+						},
+					})
+				}
 			/>
 			<Button title="Go Back" onPress={() => navigation.goBack()} />
 		</View>
