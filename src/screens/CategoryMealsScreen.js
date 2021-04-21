@@ -8,7 +8,6 @@ import { getCategory } from "../data/categories";
 const CategoryMealsScreen = ({ navigation }) => {
 	const catId = navigation.getParam("categoryId");
 	const category = getCategory(catId);
-	console.log("CATEGORY: ", category);
 	return (
 		<View style={ThemeStyles.screen}>
 			<Text style={ThemeStyles.textTitle}>{category.name}</Text>

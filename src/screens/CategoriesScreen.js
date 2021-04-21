@@ -36,7 +36,6 @@ const CategoriesScreen = ({ navigation }) => {
 		return (
 			<TouchableOpacity
 				onPress={() => {
-					console.log("Pressed: ", item.name, item.categoryId);
 					navigation.navigate({
 						routeName: "CategoryMeals",
 						params: {

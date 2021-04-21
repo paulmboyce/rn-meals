@@ -9,7 +9,7 @@ const MealDetailScreen = ({ navigation }) => {
 	const category = getCategory(navigation.getParam("categoryId"));
 	return (
 		<View style={ThemeStyles.screen}>
-			<Text style={ThemeStyles.textTitle}>{category.name}</Text>
+			<Text style={ThemeStyles.textTitle}>{category.name} Meal</Text>
 			<Button title="Go Home" onPress={() => navigation.popToTop()} />
 		</View>
 	);
