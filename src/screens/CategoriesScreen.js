@@ -36,8 +36,13 @@ const CategoriesScreen = ({ navigation }) => {
 		return (
 			<TouchableOpacity
 				onPress={() => {
-					console.log("Pressed: ", item.name, item.category);
-					navigation.navigate({ routeName: "CategoryMeals" });
+					console.log("Pressed: ", item.name, item.categoryId);
+					navigation.navigate({
+						routeName: "CategoryMeals",
+						params: {
+							categoryId: item.categoryId,
+						},
+					});
 				}}
 			>
 				<View style={styles.category}>
@@ -67,6 +72,6 @@ const CategoriesScreen = ({ navigation }) => {
 
 CategoriesScreen.navigationOptions = {
 	...getNavigationOptions(),
-	title: "Home / Categories",
+	title: "Meals App: Categories",
 };
 export default CategoriesScreen;

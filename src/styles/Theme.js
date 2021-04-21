@@ -24,6 +24,18 @@ const ThemeStyles = StyleSheet.create({
 	navigationHeaderStyleAndroid: {
 		backgroundColor: Theme.headerBackgroundColor,
 	},
+	text: {
+		fontFamily: "OpenSans",
+	},
+	textBold: {
+		fontFamily: "OpenSansBold",
+	},
+	textTitle: {
+		fontFamily: "OpenSansBold",
+		color: Theme.primaryColor,
+		fontSize: 22,
+		paddingVertical: 10,
+	},
 });
 
 export { Theme, ThemeStyles };

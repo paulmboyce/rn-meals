@@ -1,6 +1,6 @@
 import { Platform } from "react-native";
 
-import { ThemeStyles } from "../styles/Theme";
+import { Theme, ThemeStyles } from "../styles/Theme";
 
 const getNavigationOptions = () => {
 	const navigationHeaderStyle = Platform.select({
@@ -11,7 +11,8 @@ const getNavigationOptions = () => {
 	return {
 		title: "Override title in component",
 		headerStyle: navigationHeaderStyle,
-		headerTintColor: Platform.OS === "android" ? "white" : "#4a148c",
+		headerTintColor:
+			Platform.OS === "android" ? Theme.backgroundColor : Theme.primaryColor,
 	};
 };
 
