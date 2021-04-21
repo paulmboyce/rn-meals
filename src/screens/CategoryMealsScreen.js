@@ -29,9 +29,14 @@ const CategoryMealsScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({});
 
-CategoryMealsScreen.navigationOptions = {
-	...getNavigationOptions(),
-	title: "Meal Categories",
+CategoryMealsScreen.navigationOptions = (navProps) => {
+	const catId = navProps.navigation.getParam("categoryId");
+	const category = getCategory(catId);
+
+	return {
+		...getNavigationOptions(),
+		title: category.name,
+	};
 };
 
 export default CategoryMealsScreen;
