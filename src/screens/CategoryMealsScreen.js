@@ -1,10 +1,12 @@
 import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 
+import { ThemeStyles } from "../styles/Theme";
+import getNavigationOptions from "../navigation/NavigationOptions";
+
 const CategoryMealsScreen = ({ navigation }) => {
 	return (
 		<View style={styles.screen}>
-			<Text style={styles.text}>This is the Category Meals Screen</Text>
 			<Button
 				title="View Meal Details"
 				onPress={() => navigation.navigate({ routeName: "MealDetail" })}
@@ -24,5 +26,10 @@ const styles = StyleSheet.create({
 		fontFamily: "OpenSans",
 	},
 });
+
+CategoryMealsScreen.navigationOptions = {
+	...getNavigationOptions(),
+	title: "Meal Categories",
+};
 
 export default CategoryMealsScreen;
