@@ -3,10 +3,19 @@ import { View, Text, StyleSheet, Button } from "react-native";
 
 import { ThemeStyles } from "../styles/Theme";
 import { getCategory } from "../data/categories";
+import { getMeals } from "../data/meals";
 
 const CategoryMealsScreen = ({ navigation }) => {
 	const catId = navigation.getParam("categoryId");
 	const category = getCategory(catId);
+	const mealsInCategory = getMeals(catId);
+	console.log("render CategoryMealsScreen...", catId);
+
+	mealsInCategory.map((meal) => {
+		console.log("Found meal: ", meal.title);
+		return true;
+	});
+
 	return (
 		<View style={ThemeStyles.screen}>
 			<Text style={ThemeStyles.textTitle}>{category.name}</Text>

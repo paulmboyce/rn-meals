@@ -1,5 +1,16 @@
 import Meal from "../models/Meal";
 
+const getMeals = (categoryId) => {
+	const meals = MEALS.filter((meal) => {
+		return meal.categoryIds.includes(categoryId);
+	});
+	console.log("MEALS: ", meals.length);
+	if (meals === undefined) {
+		throw Error("Oops! Could not fnd meals for categoryId: ", categoryId);
+	}
+	return meals;
+};
+
 const MEALS = [
 	new Meal(
 		"m1",
@@ -321,4 +332,4 @@ const MEALS = [
 		true
 	),
 ];
-export { MEALS };
+export { MEALS, getMeals };

@@ -1,5 +1,6 @@
 class Meal {
 	constructor(
+		mealId,
 		categoryIds,
 		title,
 		affordability,
@@ -8,12 +9,12 @@ class Meal {
 		duration,
 		ingredients,
 		steps,
-		isGlutenFree = false,
-		isVegan = false,
-		isVegetarian = false,
-		isLactoseFree = false
+		isGlutenFree,
+		isVegan,
+		isVegetarian,
+		isLactoseFree
 	) {
-		this.id = Math.random().toString();
+		this.id = mealId;
 		this.categoryIds = categoryIds;
 		this.title = title;
 		this.affordability = affordability;
