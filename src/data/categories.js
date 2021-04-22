@@ -1,46 +1,13 @@
+import Category from "../models/Category";
+
 const CATEGORIES = [
-	{
-		id: Math.random().toString(),
-		name: "Italian",
-		color: "pink",
-		categoryId: "CAT1",
-	},
-	{
-		id: Math.random().toString(),
-		name: "Quick & Easy",
-		color: "red",
-		categoryId: "CAT2",
-	},
-	{
-		id: Math.random().toString(),
-		name: "Hamburgers",
-		color: "wheat",
-		categoryId: "CAT3",
-	},
-	{
-		id: Math.random().toString(),
-		name: "German",
-		color: "yellow",
-		categoryId: "CAT4",
-	},
-	{
-		id: Math.random().toString(),
-		name: "Vietamese",
-		color: "cornflowerblue",
-		categoryId: "CAT5",
-	},
-	{
-		id: Math.random().toString(),
-		name: "Bakery",
-		color: "lightgreen",
-		categoryId: "CAT6",
-	},
-	{
-		id: Math.random().toString(),
-		name: "Sweet Treats",
-		color: "salmon",
-		categoryId: "CAT7",
-	},
+	new Category("Italian", "pink", "CAT1"),
+	new Category("Quick & Easy", "red", "CAT2"),
+	new Category("Hamburgers", "wheat", "CAT3"),
+	new Category("German", "yellow", "CAT4"),
+	new Category("Vietamese", "cornflowerblue", "CAT5"),
+	new Category("Bakery", "lightgreen", "CAT6"),
+	new Category("Sweet Treats", "salmon", "CAT7"),
 ];
 
 const getCategory = (categoryId) => {
