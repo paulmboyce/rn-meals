@@ -20,6 +20,22 @@ const ThemeStyles = StyleSheet.create({
 		alignItems: "center",
 		backgroundColor: Theme.backgroundColor,
 	},
+	screen: {
+		flex: 1,
+		justifyContent: "center",
+		alignItems: "center",
+		backgroundColor: Theme.backgroundColor,
+	},
+	box1: {
+		flex: 1,
+		justifyContent: "center",
+		alignItems: "center",
+	},
+	box2: {
+		flex: 2,
+		justifyContent: "center",
+		alignItems: "center",
+	},
 	navigationHeaderStyleIOS: {},
 	navigationHeaderStyleAndroid: {
 		backgroundColor: Theme.headerBackgroundColor,
