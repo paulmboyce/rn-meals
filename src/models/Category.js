@@ -1,5 +1,5 @@
 class Category {
-	constructor(name, color, categoryId) {
+	constructor(categoryId, name, color) {
 		{
 			(this.id = Math.random().toString()),
 				(this.name = name),
