@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 const Colors = {
 	primaryColor: "#4a148c",
 	secondaryColor: "black",
-	backgroundColor: "linen",
+	backgroundColor: "white",
 };
 
 const Theme = {

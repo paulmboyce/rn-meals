@@ -29,7 +29,7 @@ const CategoriesScreen = ({ navigation }) => {
 			borderWidth: 1,
 			borderRadius: 10,
 			padding: 15,
-			minHeight: window.width * 0.3,
+			minHeight: window.width * 0.35,
 			width: window.width * 0.4,
 			justifyContent: "flex-end",
 			alignItems: "flex-end",
