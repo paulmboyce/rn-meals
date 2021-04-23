@@ -36,7 +36,7 @@ const MealDetailScreen = ({ navigation }) => {
 			height: "105%",
 			resizeMode: "cover",
 		},
-		list: {
+		listContainer: {
 			justifyContent: "center",
 			alignItems: "flex-start",
 		},
@@ -108,13 +108,13 @@ const MealDetailScreen = ({ navigation }) => {
 					}}
 				>
 					<Text style={ThemeStyles.textTitle}>{meal.name}</Text>
-					<View style={{ ...styles.list, flexDirection: "row" }}>
+					<View style={{ ...styles.listContainer, flexDirection: "row" }}>
 						{renderTags()}
 					</View>
 					<Text style={ThemeStyles.textTitleSmall}>Ingredients:</Text>
-					<View style={styles.list}>{renderIngredients()}</View>
+					<View style={styles.listContainer}>{renderIngredients()}</View>
 					<Text style={ThemeStyles.textTitleSmall}>Preparation Steps:</Text>
-					<View style={styles.list}>{renderSteps()}</View>
+					<View style={styles.listContainer}>{renderSteps()}</View>
 				</View>
 				<View style={styles.homeButtonContainer}>
 					<View style={styles.homeButton}>
