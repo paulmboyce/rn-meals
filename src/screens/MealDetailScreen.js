@@ -2,13 +2,16 @@ import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 
 import { ThemeStyles } from "../styles/Theme";
-import { getCategory } from "../data/categories";
+import { getMeal } from "../data/meals";
 
 const MealDetailScreen = ({ navigation }) => {
-	const category = getCategory(navigation.getParam("categoryId"));
+	const mealId = navigation.getParam("mealId");
+	const meal = getMeal(mealId);
+	console.log("MEAL: ", meal);
+
 	return (
 		<View style={ThemeStyles.screen}>
-			<Text style={ThemeStyles.textTitle}>{category.name} Meal</Text>
+			<Text style={ThemeStyles.textTitle}>{meal.name} Meal</Text>
 			<Button title="Go Home" onPress={() => navigation.popToTop()} />
 		</View>
 	);

@@ -13,7 +13,6 @@ const CategoryMealsScreen = ({ navigation }) => {
 	const mealsInCategory = getMeals(catId);
 
 	const renderMeals = (props) => {
-		console.log("rednerMeals PROPS: ", props);
 		const { index, item } = props;
 
 		return (
@@ -38,21 +37,6 @@ const CategoryMealsScreen = ({ navigation }) => {
 				renderItem={renderMeals}
 			/>
 			<View style={ThemeStyles.box1}>
-				<Button
-					title="View Meal Details"
-					onPress={
-						() => {
-							console.log("CLICKED: Implement MealDetail screen ");
-						} /*() =>
-						navigation.navigate({
-							routeName: "MealDetail",
-							params: {
-								categoryId: catId,
-							},
-						})
-						*/
-					}
-				/>
 				<Button title="Go Back" onPress={() => navigation.goBack()} />
 			</View>
 		</View>

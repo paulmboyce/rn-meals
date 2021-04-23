@@ -4,11 +4,20 @@ const getMeals = (categoryId) => {
 	const meals = MEALS.filter((meal) => {
 		return meal.categoryIds.includes(categoryId);
 	});
-	console.log("MEALS: ", meals.length);
 	if (meals === undefined) {
 		throw Error("Oops! Could not fnd meals for categoryId: ", categoryId);
 	}
 	return meals;
+};
+
+const getMeal = (mealId) => {
+	const meal = MEALS.find((meal) => {
+		return meal.id === mealId;
+	});
+	if (meal === undefined) {
+		throw Error("Oops! Could not find meal for mealId: ", mealId);
+	}
+	return meal;
 };
 
 const MEALS = [
@@ -332,4 +341,4 @@ const MEALS = [
 		true
 	),
 ];
-export { MEALS, getMeals };
+export { MEALS, getMeals, getMeal };
