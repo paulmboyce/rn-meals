@@ -1,4 +1,5 @@
 import Meal from "../models/Meal";
+import { makeMutable } from "react-native-reanimated";
 
 const getMeals = (categoryId) => {
 	const meals = MEALS.filter((meal) => {
@@ -18,6 +19,16 @@ const getMeal = (mealId) => {
 		throw Error("Oops! Could not find meal for mealId: ", mealId);
 	}
 	return meal;
+};
+
+const getFilters = (meal) => {
+	const filters = [
+		{ name: "isGlutenFree", value: meal.isGlutenFree },
+		{ name: "isLactoseFree", value: meal.isLactoseFree },
+		{ name: "isVegan", value: meal.isVegan },
+		{ name: "isVegetarian", value: meal.isVegetarian },
+	];
+	return filters;
 };
 
 const MEALS = [
@@ -341,4 +352,4 @@ const MEALS = [
 		true
 	),
 ];
-export { MEALS, getMeals, getMeal };
+export { MEALS, getMeals, getMeal, getFilters };
