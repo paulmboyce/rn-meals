@@ -65,12 +65,20 @@ const MealDetailScreen = ({ navigation }) => {
 
 	const renderIngredients = () => {
 		return meal.ingredients.map((ingredient) => {
-			return <Text key={ingredient}>{ingredient}</Text>;
+			return (
+				<Text style={ThemeStyles.text} key={ingredient}>
+					- {ingredient}
+				</Text>
+			);
 		});
 	};
 	const renderSteps = () => {
-		return meal.steps.map((step) => {
-			return <Text key={step}>{step}</Text>;
+		return meal.steps.map((step, index) => {
+			return (
+				<Text style={ThemeStyles.text} key={step}>
+					{index + 1}: {step}
+				</Text>
+			);
 		});
 	};
 	const renderTags = () => {
