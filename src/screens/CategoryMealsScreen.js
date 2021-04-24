@@ -5,7 +5,7 @@ import { ThemeStyles } from "../styles/Theme";
 import { getCategory } from "../data/categories";
 import { getMeals } from "../data/meals";
 import { FlatList } from "react-native-gesture-handler";
-import GridDisplay from "../components/GridDisplay";
+import GridDisplayImage from "../components/GridDisplayImage";
 
 const CategoryMealsScreen = ({ navigation }) => {
 	const catId = navigation.getParam("categoryId");
@@ -16,10 +16,11 @@ const CategoryMealsScreen = ({ navigation }) => {
 		const { index, item } = props;
 
 		return (
-			<GridDisplay
+			<GridDisplayImage
 				navigation={navigation}
 				color={category.color}
 				name={item.name}
+				imageUrl={item.imageUrl}
 				routeName="MealDetail"
 				routeParams={{
 					mealId: item.id,

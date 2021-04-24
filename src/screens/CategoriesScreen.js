@@ -22,12 +22,6 @@ const CategoriesScreen = ({ navigation }) => {
 		);
 	};
 
-	/*
-			
-
-*/
-
-	console.log("Abou tot redern CAtegories Screen....");
 	return (
 		<View style={ThemeStyles.screen}>
 			<FlatList

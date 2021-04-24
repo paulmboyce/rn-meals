@@ -11,14 +11,11 @@ import {
 
 import { ThemeStyles, Theme } from "../styles/Theme";
 import { getMeal, getFilters } from "../data/meals";
-import { ThemeColors } from "react-navigation";
 
 const MealDetailScreen = ({ navigation }) => {
 	const mealId = navigation.getParam("mealId");
 	const meal = getMeal(mealId);
-	console.log("MEAL: ", meal);
 	const filters = getFilters(meal);
-	console.log("MEAL filters: ", filters);
 
 	const window = useWindowDimensions();
 	const landScape = window.width > window.height;

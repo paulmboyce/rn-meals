@@ -13,9 +13,7 @@ import { Theme, ThemeStyles } from "../styles/Theme";
 
 const GridDisplay = (params) => {
 	const window = useWindowDimensions();
-
-	console.log("PARAMS: ", params);
-	let { navigation, color, name, routeName, routeParams } = params;
+	const { navigation, color, name, routeName, routeParams } = params;
 
 	let Touchable = TouchableOpacity;
 	if (Platform.OS === "android" && Platform.Version >= 21) {
