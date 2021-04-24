@@ -1,10 +1,16 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Image } from "react-native";
 import AppLoading from "expo-app-loading";
 import { loadAsync as loadFontsAsync } from "expo-font";
+import { Asset } from "expo-asset";
 
 import MealsNavigator from "./src/navigation/MealsNavigator";
+import { getImageUrls } from "./src/data/meals";
+
+const fetchAssets = () => {
+	return Promise.all([fetchFonts(), ...fetchOnlineImages()]);
+};
 
 const fetchFonts = () => {
 	console.log("Fetching fonts...");
@@ -14,13 +20,19 @@ const fetchFonts = () => {
 	});
 };
 
+const fetchOnlineImages = () => {
+	console.log("Pre-loading images...");
+	const imageUrls = getImageUrls();
+	return imageUrls.map((url) => Image.prefetch(url));
+};
+
 export default function App() {
 	const [isReady, setIsReady] = useState(false);
 
 	if (!isReady) {
 		return (
 			<AppLoading
-				startAsync={fetchFonts}
+				startAsync={fetchAssets}
 				onFinish={() => {
 					setIsReady(true);
 					console.log("Starting App...");

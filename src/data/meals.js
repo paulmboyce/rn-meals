@@ -21,6 +21,17 @@ const getMeal = (mealId) => {
 	return meal;
 };
 
+const getImageUrls = () => {
+	const imageUrls = MEALS.map((meal) => {
+		return meal.imageUrl;
+	});
+	if (imageUrls === undefined) {
+		throw Error("Oops! Could not find images");
+	}
+	console.log("Image URLs... ", imageUrls);
+	return imageUrls;
+};
+
 const getFilters = (meal) => {
 	const filters = [
 		{ name: "isGlutenFree", value: meal.isGlutenFree },
@@ -352,4 +363,4 @@ const MEALS = [
 		true
 	),
 ];
-export { MEALS, getMeals, getMeal, getFilters };
+export { MEALS, getMeals, getMeal, getFilters, getImageUrls };
