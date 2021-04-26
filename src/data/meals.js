@@ -28,7 +28,6 @@ const getImageUrls = () => {
 	if (imageUrls === undefined) {
 		throw Error("Oops! Could not find images");
 	}
-	console.log("Image URLs... ", imageUrls);
 	return imageUrls;
 };
 

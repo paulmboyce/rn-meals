@@ -8,9 +8,11 @@ import {
 	Image,
 	ScrollView,
 } from "react-native";
+import { Item } from "react-navigation-header-buttons";
 
 import { ThemeStyles, Theme } from "../styles/Theme";
 import { getMealById, getFiltersForMeal } from "../data/meals";
+import MaterialHeaderButtons from "../navigation/HeaderButtons";
 
 const getMeal = (navigation) => {
 	const mealId = navigation.getParam("mealId");
@@ -132,6 +134,17 @@ MealDetailScreen.navigationOptions = ({ navigation }) => {
 
 	return {
 		headerTitle: meal.name,
+		headerRight: () => {
+			return (
+				<MaterialHeaderButtons>
+					<Item
+						title="Add Favorite"
+						iconName="star"
+						onPress={() => console.log("PRESSED favorite")}
+					/>
+				</MaterialHeaderButtons>
+			);
+		},
 	};
 };
 
