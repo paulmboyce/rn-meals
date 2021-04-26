@@ -45,11 +45,6 @@ const tabNavigator = createMaterialBottomTabNavigator(
 			backgroundColor:
 				Platform.OS === "ios" ? Theme.backgroundColor : Theme.primaryColor,
 		},
-		tabBarOptions: {
-			activeTintColor:
-				Platform.OS === "ios" ? Theme.primaryColor : Theme.backgroundColor,
-			inactiveTintColor: "gray",
-		},
 		defaultNavigationOptions: ({ navigation }) => ({
 			tabBarIcon: ({ focused, horizontal, tintColor }) => {
 				const { routeName } = navigation.state;

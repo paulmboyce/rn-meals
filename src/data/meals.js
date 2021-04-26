@@ -11,6 +11,16 @@ const getMealsByCategory = (categoryId) => {
 	return meals;
 };
 
+const getMealsByFilter = (filterName) => {
+	const meals = MEALS.filter((meal) => {
+		return meal[filterName] === true;
+	});
+	if (meals === undefined) {
+		throw Error("Oops! Could not fnd meals for: ", filterName);
+	}
+	return meals;
+};
+
 const getMealById = (mealId) => {
 	const meal = MEALS.find((meal) => {
 		return meal.id === mealId;
@@ -70,6 +80,7 @@ const MEALS = [
 		false,
 		true,
 		true,
+		true,
 		true
 	),
 
@@ -96,7 +107,8 @@ const MEALS = [
 		false,
 		false,
 		false,
-		false
+		false,
+		true
 	),
 
 	new Meal(
@@ -125,6 +137,7 @@ const MEALS = [
 		false,
 		false,
 		false,
+		true,
 		true
 	),
 
@@ -158,7 +171,8 @@ const MEALS = [
 		false,
 		false,
 		false,
-		false
+		false,
+		true
 	),
 
 	new Meal(
@@ -189,6 +203,7 @@ const MEALS = [
 		],
 		true,
 		false,
+		true,
 		true,
 		true
 	),
@@ -223,7 +238,8 @@ const MEALS = [
 		true,
 		false,
 		true,
-		false
+		false,
+		true
 	),
 
 	new Meal(
@@ -252,6 +268,7 @@ const MEALS = [
 		true,
 		false,
 		true,
+		false,
 		false
 	),
 
@@ -283,7 +300,8 @@ const MEALS = [
 		true,
 		false,
 		false,
-		true
+		true,
+		false
 	),
 
 	new Meal(
@@ -330,6 +348,7 @@ const MEALS = [
 		true,
 		false,
 		true,
+		false,
 		false
 	),
 	new Meal(
@@ -359,7 +378,8 @@ const MEALS = [
 		true,
 		true,
 		true,
-		true
+		true,
+		false
 	),
 ];
 export {
@@ -367,5 +387,6 @@ export {
 	getMealsByCategory,
 	getMealById,
 	getFiltersForMeal,
+	getMealsByFilter,
 	getImageUrls,
 };

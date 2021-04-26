@@ -1,23 +1,52 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Button } from "react-native";
 
-const FavoritesScreen = (props) => {
+import { ThemeStyles, Theme } from "../styles/Theme";
+import { getMealsByFilter } from "../data/meals";
+import { FlatList } from "react-native-gesture-handler";
+import GridDisplayImage from "../components/GridDisplayImage";
+
+const FavoritesScreen = ({ navigation }) => {
+	const mealFavorites = getMealsByFilter("isFavorite");
+
+	const renderMeals = (props) => {
+		const { index, item } = props;
+
+		return (
+			<GridDisplayImage
+				navigation={navigation}
+				color={Theme.primaryColor}
+				name={item.name}
+				imageUrl={item.imageUrl}
+				routeName="MealDetail"
+				routeParams={{
+					mealId: item.id,
+				}}
+			/>
+		);
+	};
+
 	return (
-		<View style={styles.screen}>
-			<Text style={styles.text}>This is the Favorites Screen </Text>
+		<View style={ThemeStyles.screen}>
+			<Text style={ThemeStyles.textTitle}>My Favorites</Text>
+			<FlatList
+				data={mealFavorites}
+				keyExtractor={(item) => item.id}
+				renderItem={renderMeals}
+			/>
+			<View style={ThemeStyles.box1}>
+				<Button title="Go Back" onPress={() => navigation.goBack()} />
+			</View>
 		</View>
 	);
 };
 
-const styles = StyleSheet.create({
-	screen: {
-		flex: 1,
-		justifyContent: "center",
-		alignItems: "center",
-	},
-	text: {
-		fontFamily: "OpenSans",
-	},
-});
+const styles = StyleSheet.create({});
+
+FavoritesScreen.navigationOptions = (navProps) => {
+	return {
+		title: "My Favorites",
+	};
+};
 
 export default FavoritesScreen;
