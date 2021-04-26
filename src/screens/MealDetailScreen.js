@@ -10,12 +10,16 @@ import {
 } from "react-native";
 
 import { ThemeStyles, Theme } from "../styles/Theme";
-import { getMeal, getFilters } from "../data/meals";
+import { getMealById, getFiltersForMeal } from "../data/meals";
+
+const getMeal = (navigation) => {
+	const mealId = navigation.getParam("mealId");
+	return getMealById(mealId);
+};
 
 const MealDetailScreen = ({ navigation }) => {
-	const mealId = navigation.getParam("mealId");
-	const meal = getMeal(mealId);
-	const filters = getFilters(meal);
+	const meal = getMeal(navigation);
+	const filters = getFiltersForMeal(meal);
 
 	const window = useWindowDimensions();
 	const landScape = window.width > window.height;
@@ -123,7 +127,12 @@ const MealDetailScreen = ({ navigation }) => {
 	);
 };
 
-MealDetailScreen.navigationOptions = {
-	title: "Meal Details",
+MealDetailScreen.navigationOptions = ({ navigation }) => {
+	const meal = getMeal(navigation);
+
+	return {
+		headerTitle: meal.name,
+	};
 };
+
 export default MealDetailScreen;

@@ -11,7 +11,7 @@ const getMeals = (categoryId) => {
 	return meals;
 };
 
-const getMeal = (mealId) => {
+const getMealById = (mealId) => {
 	const meal = MEALS.find((meal) => {
 		return meal.id === mealId;
 	});
@@ -32,7 +32,7 @@ const getImageUrls = () => {
 	return imageUrls;
 };
 
-const getFilters = (meal) => {
+const getFiltersForMeal = (meal) => {
 	const filters = [
 		{ name: "isGlutenFree", value: meal.isGlutenFree },
 		{ name: "isLactoseFree", value: meal.isLactoseFree },
@@ -363,4 +363,4 @@ const MEALS = [
 		true
 	),
 ];
-export { MEALS, getMeals, getMeal, getFilters, getImageUrls };
+export { MEALS, getMeals, getMealById, getFiltersForMeal, getImageUrls };
