@@ -1,7 +1,7 @@
 import React from "react";
-import { View, FlatList, Text, useWindowDimensions } from "react-native";
+import { View, FlatList, useWindowDimensions } from "react-native";
 
-import { ThemeStyles, Theme } from "../styles/Theme";
+import { ThemeStyles } from "../styles/Theme";
 import { CATEGORIES } from "../data/categories";
 import GridDisplay from "../components/GridDisplay";
 

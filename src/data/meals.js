@@ -1,7 +1,7 @@
 import Meal from "../models/Meal";
 import { makeMutable } from "react-native-reanimated";
 
-const getMeals = (categoryId) => {
+const getMealsByCategory = (categoryId) => {
 	const meals = MEALS.filter((meal) => {
 		return meal.categoryIds.includes(categoryId);
 	});
@@ -363,4 +363,10 @@ const MEALS = [
 		true
 	),
 ];
-export { MEALS, getMeals, getMealById, getFiltersForMeal, getImageUrls };
+export {
+	MEALS,
+	getMealsByCategory,
+	getMealById,
+	getFiltersForMeal,
+	getImageUrls,
+};

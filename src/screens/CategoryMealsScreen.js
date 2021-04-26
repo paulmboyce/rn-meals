@@ -3,14 +3,14 @@ import { View, Text, StyleSheet, Button } from "react-native";
 
 import { ThemeStyles } from "../styles/Theme";
 import { getCategory } from "../data/categories";
-import { getMeals } from "../data/meals";
+import { getMealsByCategory } from "../data/meals";
 import { FlatList } from "react-native-gesture-handler";
 import GridDisplayImage from "../components/GridDisplayImage";
 
 const CategoryMealsScreen = ({ navigation }) => {
 	const catId = navigation.getParam("categoryId");
 	const category = getCategory(catId);
-	const mealsInCategory = getMeals(catId);
+	const mealsInCategory = getMealsByCategory(catId);
 
 	const renderMeals = (props) => {
 		const { index, item } = props;
