@@ -34,17 +34,22 @@ const tabNavigator = createBottomTabNavigator(
 		defaultNavigationOptions: ({ navigation }) => ({
 			tabBarIcon: ({ focused, horizontal, tintColor }) => {
 				const { routeName } = navigation.state;
-				let iconName;
-				if (routeName === "Home") {
-					iconName = focused ? "home" : "home-outline";
-				} else if (routeName === "Settings") {
-					iconName = focused ? "settings-sharp" : "settings-outline";
-				} else if (routeName === "Favorites") {
-					iconName = focused ? "star" : "star-outline";
+				let icon;
+				switch (routeName) {
+					case "Settings": {
+						icon = focused ? "settings-sharp" : "settings-outline";
+						break;
+					}
+					case "Favorites": {
+						icon = focused ? "star" : "star-outline";
+						break;
+					}
+					default:
+						icon = focused ? "home" : "home-outline";
 				}
 
 				// You can return any component that you like here!
-				return <Ionicons name={iconName} size={25} color={tintColor} />;
+				return <Ionicons name={icon} size={25} color={tintColor} />;
 			},
 		}),
 		tabBarOptions: {
