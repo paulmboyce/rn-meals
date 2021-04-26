@@ -26,6 +26,10 @@ const stackNavigator = createStackNavigator(
 	}
 );
 
+/**
+ * NOTE: This config is for React Navigation Version 4.
+ * https://reactnavigation.org/docs/4.x/material-bottom-tab-navigator/
+ */
 const tabNavigator = createMaterialBottomTabNavigator(
 	{
 		Home: { screen: stackNavigator },
