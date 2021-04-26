@@ -8,19 +8,24 @@ import { Theme } from "../styles/Theme";
 const buttonColor =
 	Platform.OS === "ios" ? Theme.primaryColor : Theme.backgroundColor;
 
-// define IconComponent, color, sizes and OverflowIcon in one place
+/**
+ * Set defaults for IconComponent, color, sizes, even OverflowIcon.
+ */
 const MaterialHeaderButton = (props) => (
 	<HeaderButton
+		{...props}
 		IconComponent={MaterialIcons}
 		iconSize={23}
 		color={buttonColor}
-		{...props}
 	/>
 );
 
+/**
+ * HeaderButtonComponent takes a template HeaderButton component
+ */
 const MaterialHeaderButtons = (props) => {
 	return (
-		<HeaderButtons HeaderButtonComponent={MaterialHeaderButton} {...props} />
+		<HeaderButtons {...props} HeaderButtonComponent={MaterialHeaderButton} />
 	);
 };
 
