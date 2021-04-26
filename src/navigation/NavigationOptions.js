@@ -9,7 +9,7 @@ const getNavigationOptions = () => {
 	});
 
 	return {
-		title: "Override title in component",
+		title: "Best Meals App",
 		headerStyle: navigationHeaderStyle,
 		headerTintColor:
 			Platform.OS === "android" ? Theme.backgroundColor : Theme.primaryColor,
