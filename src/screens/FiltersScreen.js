@@ -20,4 +20,8 @@ const styles = StyleSheet.create({
 	},
 });
 
+FiltersScreen.navigationOptions = {
+	title: "Settings",
+};
+
 export default FiltersScreen;

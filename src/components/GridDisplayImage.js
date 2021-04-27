@@ -14,7 +14,7 @@ import { Theme, ThemeStyles } from "../styles/Theme";
 
 const GridDisplayImage = (params) => {
 	const window = useWindowDimensions();
-	const { navigation, color, name, routeName, routeParams, imageUrl } = params;
+	const { navigation, name, routeName, routeParams, imageUrl } = params;
 
 	let Touchable = TouchableOpacity;
 	if (Platform.OS === "android" && Platform.Version >= 21) {
