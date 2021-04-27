@@ -31,9 +31,6 @@ const settingsNavigator = createStackNavigator(
 		Settings: { screen: FiltersScreen },
 	},
 	{
-		navigationOptions: {
-			drawerLabel: "Settings",
-		},
 		defaultNavigationOptions: getNavigationOptions(),
 	}
 );
@@ -57,9 +54,6 @@ const tabNavigator = createMaterialBottomTabNavigator(
 		Favorites: { screen: favoritesNavigator },
 	},
 	{
-		navigationOptions: {
-			drawerLabel: "Home",
-		},
 		initialRouteName: "Home",
 		activeColor:
 			Platform.OS === "ios" ? Theme.primaryColor : Theme.backgroundColor,
@@ -93,8 +87,18 @@ const tabNavigator = createMaterialBottomTabNavigator(
 );
 
 const drawerNavigator = createDrawerNavigator({
-	DrawerHome: tabNavigator,
-	DrawerSettings: settingsNavigator,
+	DrawerHome: {
+		screen: tabNavigator,
+		navigationOptions: {
+			drawerLabel: "Home",
+		},
+	},
+	DrawerSettings: {
+		screen: settingsNavigator,
+		navigationOptions: {
+			drawerLabel: "Settings",
+		},
+	},
 });
 
 export default createAppContainer(drawerNavigator);
