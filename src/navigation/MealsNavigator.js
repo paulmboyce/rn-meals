@@ -25,6 +25,22 @@ const stackNavigator = createStackNavigator(
 		defaultNavigationOptions: getNavigationOptions(),
 	}
 );
+const settingsNavigator = createStackNavigator(
+	{
+		Settings: { screen: FiltersScreen },
+	},
+	{
+		defaultNavigationOptions: getNavigationOptions(),
+	}
+);
+const favoritesNavigator = createStackNavigator(
+	{
+		Favorites: { screen: FavoritesScreen },
+	},
+	{
+		defaultNavigationOptions: getNavigationOptions(),
+	}
+);
 
 /**
  * NOTE: This config is for React Navigation Version 4.
@@ -33,8 +49,8 @@ const stackNavigator = createStackNavigator(
 const tabNavigator = createMaterialBottomTabNavigator(
 	{
 		Home: { screen: stackNavigator },
-		Settings: { screen: FiltersScreen },
-		Favorites: { screen: FavoritesScreen },
+		Favorites: { screen: favoritesNavigator },
+		Settings: { screen: settingsNavigator },
 	},
 	{
 		initialRouteName: "Home",
@@ -69,40 +85,4 @@ const tabNavigator = createMaterialBottomTabNavigator(
 	}
 );
 
-/*
-const tabNavigator = createBottomTabNavigator(
-	{
-		Home: stackNavigator,
-		Settings: FiltersScreen,
-		Favorites: FavoritesScreen,
-	},
-	{
-		defaultNavigationOptions: ({ navigation }) => ({
-			tabBarIcon: ({ focused, horizontal, tintColor }) => {
-				const { routeName } = navigation.state;
-				let icon;
-				switch (routeName) {
-					case "Settings": {
-						icon = focused ? "settings-sharp" : "settings-outline";
-						break;
-					}
-					case "Favorites": {
-						icon = focused ? "star" : "star-outline";
-						break;
-					}
-					default:
-						icon = focused ? "home" : "home-outline";
-				}
-
-				// You can return any component that you like here!
-				return <Ionicons name={icon} size={25} color={tintColor} />;
-			},
-		}),
-		tabBarOptions: {
-			activeTintColor: Theme.primaryColor,
-			inactiveTintColor: "gray",
-		},
-	}
-);
-*/
 export default createAppContainer(tabNavigator);
