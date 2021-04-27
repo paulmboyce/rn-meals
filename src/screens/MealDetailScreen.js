@@ -43,16 +43,7 @@ const MealDetailScreen = ({ navigation }) => {
 			justifyContent: "center",
 			alignItems: "flex-start",
 		},
-		homeButtonContainer: {
-			width: "100%",
-			marginVertical: 60,
-			borderTopColor: Theme.primaryColor,
-			borderTopWidth: 1,
-		},
-		homeButton: {
-			paddingVertical: 20,
-			alignItems: "center",
-		},
+
 		filter: {
 			borderWidth: 2,
 			borderColor: Theme.primaryColor,
@@ -118,11 +109,6 @@ const MealDetailScreen = ({ navigation }) => {
 					<View style={styles.listContainer}>{renderIngredients()}</View>
 					<Text style={ThemeStyles.textTitleSmall}>Preparation Steps:</Text>
 					<View style={styles.listContainer}>{renderSteps()}</View>
-				</View>
-				<View style={styles.homeButtonContainer}>
-					<View style={styles.homeButton}>
-						<Button title="Go Home" onPress={() => navigation.popToTop()} />
-					</View>
 				</View>
 			</View>
 		</ScrollView>

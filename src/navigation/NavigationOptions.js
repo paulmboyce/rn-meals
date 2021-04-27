@@ -11,6 +11,13 @@ const getNavigationOptions = () => {
 	return {
 		title: "Best Meals App",
 		headerStyle: navigationHeaderStyle,
+		headerTitleStyle: {
+			fontFamily: ThemeStyles.textBold.fontFamily,
+		},
+		headerBackTitleStyle: {
+			fontFamily: ThemeStyles.text.fontFamily,
+		},
+
 		headerTintColor:
 			Platform.OS === "android" ? Theme.backgroundColor : Theme.primaryColor,
 	};

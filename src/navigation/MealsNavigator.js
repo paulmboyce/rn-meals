@@ -14,7 +14,7 @@ import FavoritesScreen from "../screens/FavoritesScreen";
 import FiltersScreen from "../screens/FiltersScreen";
 
 import getNavigationOptions from "./NavigationOptions";
-import { Theme } from "../styles/Theme";
+import { Theme, ThemeStyles } from "../styles/Theme";
 
 const stackNavigator = createStackNavigator(
 	{
@@ -86,19 +86,29 @@ const tabNavigator = createMaterialBottomTabNavigator(
 	}
 );
 
-const drawerNavigator = createDrawerNavigator({
-	DrawerHome: {
-		screen: tabNavigator,
-		navigationOptions: {
-			drawerLabel: "Home",
+const drawerNavigator = createDrawerNavigator(
+	{
+		DrawerHome: {
+			screen: tabNavigator,
+			navigationOptions: {
+				drawerLabel: "Home",
+			},
+		},
+		DrawerSettings: {
+			screen: settingsNavigator,
+			navigationOptions: {
+				drawerLabel: "Settings",
+			},
 		},
 	},
-	DrawerSettings: {
-		screen: settingsNavigator,
-		navigationOptions: {
-			drawerLabel: "Settings",
+	{
+		contentOptions: {
+			activeTintColor: Theme.secondaryColor,
+			labelStyle: {
+				fontStyle: ThemeStyles.textBold,
+			},
 		},
-	},
-});
+	}
+);
 
 export default createAppContainer(drawerNavigator);

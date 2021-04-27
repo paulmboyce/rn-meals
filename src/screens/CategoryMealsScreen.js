@@ -15,11 +15,7 @@ const CategoryMealsScreen = ({ navigation }) => {
 
 	return (
 		<View style={ThemeStyles.screen}>
-			<Text style={ThemeStyles.textTitle}>{category.name}</Text>
 			<MealList mealsData={mealsInCategory} navigation={navigation} />
-			<View style={ThemeStyles.box1}>
-				<Button title="Go Back" onPress={() => navigation.goBack()} />
-			</View>
 		</View>
 	);
 };
