@@ -1,5 +1,5 @@
 import React from "react";
-import { Platform } from "react-native";
+import { Platform, Text } from "react-native";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
@@ -50,8 +50,18 @@ const favoritesNavigator = createStackNavigator(
  */
 const tabNavigator = createMaterialBottomTabNavigator(
 	{
-		Home: { screen: stackNavigator },
-		Favorites: { screen: favoritesNavigator },
+		Home: {
+			screen: stackNavigator,
+			navigationOptions: {
+				tabBarLabel: <Text style={ThemeStyles.textBold}>Home</Text>,
+			},
+		},
+		Favorites: {
+			screen: favoritesNavigator,
+			navigationOptions: {
+				tabBarLabel: <Text style={ThemeStyles.textBold}>Favorites</Text>,
+			},
+		},
 	},
 	{
 		initialRouteName: "Home",
@@ -104,9 +114,7 @@ const drawerNavigator = createDrawerNavigator(
 	{
 		contentOptions: {
 			activeTintColor: Theme.secondaryColor,
-			labelStyle: {
-				fontStyle: ThemeStyles.textBold,
-			},
+			labelStyle: ThemeStyles.textBold,
 		},
 	}
 );
