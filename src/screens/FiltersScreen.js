@@ -1,10 +1,11 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import ToggleMenuDrawer from "../navigation/ToggleMenuDrawer";
 
 const FiltersScreen = (props) => {
 	return (
 		<View style={styles.screen}>
-			<Text style={styles.text}>This is the Filters Screen </Text>
+			<Text style={styles.text}>This is indeed the Filters Screen </Text>
 		</View>
 	);
 };
@@ -20,8 +21,13 @@ const styles = StyleSheet.create({
 	},
 });
 
-FiltersScreen.navigationOptions = {
-	title: "Settings",
+FiltersScreen.navigationOptions = ({ navigation }) => {
+	return {
+		title: "Settings",
+		headerLeft: () => {
+			return <ToggleMenuDrawer navigation={navigation} />;
+		},
+	};
 };
 
 export default FiltersScreen;

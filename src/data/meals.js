@@ -1,5 +1,4 @@
 import Meal from "../models/Meal";
-import { makeMutable } from "react-native-reanimated";
 
 const getMealsByCategory = (categoryId) => {
 	const meals = MEALS.filter((meal) => {

@@ -3,8 +3,9 @@ import { Platform } from "react-native";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
-import { Ionicons } from "@expo/vector-icons";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
+import { createDrawerNavigator } from "react-navigation-drawer";
+import { Ionicons } from "@expo/vector-icons";
 
 import CategoriesScreen from "../screens/CategoriesScreen";
 import CategoryMealsScreen from "../screens/CategoryMealsScreen";
@@ -51,7 +52,6 @@ const tabNavigator = createMaterialBottomTabNavigator(
 	{
 		Home: { screen: stackNavigator },
 		Favorites: { screen: favoritesNavigator },
-		Settings: { screen: settingsNavigator },
 	},
 	{
 		initialRouteName: "Home",
@@ -86,4 +86,9 @@ const tabNavigator = createMaterialBottomTabNavigator(
 	}
 );
 
-export default createAppContainer(tabNavigator);
+const drawerNavigator = createDrawerNavigator({
+	Home: tabNavigator,
+	"App Settings": settingsNavigator,
+});
+
+export default createAppContainer(drawerNavigator);

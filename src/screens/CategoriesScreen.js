@@ -1,9 +1,11 @@
 import React from "react";
 import { View, FlatList, useWindowDimensions } from "react-native";
+import { Item } from "react-navigation-header-buttons";
 
 import { ThemeStyles } from "../styles/Theme";
 import { CATEGORIES } from "../data/categories";
 import GridDisplay from "../components/GridDisplay";
+import ToggleMenuDrawer from "../navigation/ToggleMenuDrawer";
 
 const CategoriesScreen = ({ navigation }) => {
 	const window = useWindowDimensions();
@@ -34,7 +36,12 @@ const CategoriesScreen = ({ navigation }) => {
 	);
 };
 
-CategoriesScreen.navigationOptions = {
-	title: "Meals App: Categories",
+CategoriesScreen.navigationOptions = ({ navigation }) => {
+	return {
+		title: "Meals App: Categories",
+		headerLeft: () => {
+			return <ToggleMenuDrawer navigation={navigation} />;
+		},
+	};
 };
 export default CategoriesScreen;

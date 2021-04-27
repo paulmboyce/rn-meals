@@ -1,11 +1,11 @@
 import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
+import { Item } from "react-navigation-header-buttons";
 
 import { ThemeStyles, Theme } from "../styles/Theme";
 import { getMealsByFilter } from "../data/meals";
-import { FlatList } from "react-native-gesture-handler";
-import GridDisplayImage from "../components/GridDisplayImage";
 import MealList from "../components/MealList";
+import ToggleMenuDrawer from "../navigation/ToggleMenuDrawer";
 
 const FavoritesScreen = ({ navigation }) => {
 	const mealFavorites = getMealsByFilter("isFavorite");
@@ -21,9 +21,12 @@ const FavoritesScreen = ({ navigation }) => {
 	);
 };
 
-FavoritesScreen.navigationOptions = (navProps) => {
+FavoritesScreen.navigationOptions = ({ navigation }) => {
 	return {
 		title: "My Favorites",
+		headerLeft: () => {
+			return <ToggleMenuDrawer navigation={navigation} />;
+		},
 	};
 };
 
