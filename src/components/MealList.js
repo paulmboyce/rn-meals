@@ -17,6 +17,12 @@ const renderMeals = (navigation, { index, item }) => {
 	);
 };
 
+/**
+ * In const renderMeals = (navigation, { index, item }) => { ...
+ * Note use below of .bind(null, navigation) to pass
+ * navigation as first param. FlatList will pass { index, item }
+ * Also, null is passed as we are not trying to set 'this'.
+ */
 const MealList = ({ mealsData, navigation }) => {
 	return (
 		<FlatList
