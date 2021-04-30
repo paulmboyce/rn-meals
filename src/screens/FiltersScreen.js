@@ -27,7 +27,8 @@ const FiltersScreen = (props) => {
 			alignItems: "center",
 		},
 		switchWrapper: {
-			borderWidth: 1,
+			borderWidth: 0.25,
+			borderRadius: 6,
 			borderColor: Theme.cancelColor,
 		},
 	});

@@ -3,7 +3,6 @@ import {
 	View,
 	Text,
 	StyleSheet,
-	Button,
 	useWindowDimensions,
 	Image,
 	ScrollView,
@@ -45,7 +44,8 @@ const MealDetailScreen = ({ navigation }) => {
 		},
 		listItem: {
 			borderColor: Theme.cancelColor,
-			borderWidth: 1,
+			borderWidth: 0.3,
+			borderRadius: 4,
 			width: window.width * 0.9,
 			marginVertical: 2,
 			padding: 10,
