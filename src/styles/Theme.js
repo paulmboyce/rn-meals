@@ -9,6 +9,7 @@ const Colors = {
 	secondaryColor: "#880e4f",
 	secondaryColor80Transparent: "#880e4f" + "CC",
 	backgroundColor: "white",
+	cancelColor: "#ccc",
 };
 
 const Theme = {
@@ -18,6 +19,7 @@ const Theme = {
 	secondaryColor80Transparent: Colors.secondaryColor80Transparent,
 	backgroundColor: Colors.backgroundColor,
 	headerBackgroundColor: Colors.primaryColor,
+	cancelColor: Colors.cancelColor,
 };
 
 const ThemeStyles = StyleSheet.create({

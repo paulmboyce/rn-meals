@@ -43,7 +43,13 @@ const MealDetailScreen = ({ navigation }) => {
 			justifyContent: "center",
 			alignItems: "flex-start",
 		},
-
+		listItem: {
+			borderColor: Theme.cancelColor,
+			borderWidth: 1,
+			width: window.width * 0.9,
+			marginVertical: 2,
+			padding: 10,
+		},
 		filter: {
 			borderWidth: 2,
 			borderColor: Theme.primaryColor,
@@ -60,18 +66,20 @@ const MealDetailScreen = ({ navigation }) => {
 	const renderIngredients = () => {
 		return meal.ingredients.map((ingredient) => {
 			return (
-				<Text style={ThemeStyles.text} key={ingredient}>
-					- {ingredient}
-				</Text>
+				<View key={ingredient} style={styles.listItem}>
+					<Text style={ThemeStyles.text}>{ingredient}</Text>
+				</View>
 			);
 		});
 	};
 	const renderSteps = () => {
 		return meal.steps.map((step, index) => {
 			return (
-				<Text style={ThemeStyles.text} key={step}>
-					{index + 1}: {step}
-				</Text>
+				<View key={step} style={styles.listItem}>
+					<Text style={ThemeStyles.text}>
+						{index + 1}. {step}
+					</Text>
+				</View>
 			);
 		});
 	};
