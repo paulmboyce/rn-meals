@@ -7,10 +7,9 @@ const ThemeSwitch = (props) => {
 	const [isEnabled, setIsEnabled] = useState(
 		props.initialValue ? props.value : false
 	);
-	const toggleSwitch = () => {
-		setIsEnabled((oldVal) => !oldVal);
-		console.log(`Switch toggled from ${isEnabled} to ${!isEnabled}`);
-		props.onValueChange(isEnabled);
+	const toggleSwitch = (val) => {
+		setIsEnabled(val);
+		props.onValueChange(val);
 	};
 
 	return (

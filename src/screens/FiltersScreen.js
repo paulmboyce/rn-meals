@@ -1,24 +1,40 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, useWindowDimensions } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+	View,
+	Text,
+	StyleSheet,
+	useWindowDimensions,
+	Button,
+} from "react-native";
 
 import ToggleMenuDrawer from "../navigation/ToggleMenuDrawer";
 import { ThemeStyles, Theme } from "../styles/Theme";
 import LabeledSwitch from "../components/LabeledSwitch";
+import ThemeButton from "../components/ThemeButton";
+import MaterialHeaderButtons from "../navigation/HeaderButtons";
 
-const FiltersScreen = (props) => {
+const FiltersScreen = ({ navigation }) => {
 	const [isGlutenFree, setIsGlutenFree] = useState(false);
 	const [isLactoseFree, setIsLactoseFree] = useState(false);
 	const [isVegan, setIsVegan] = useState(false);
 	const [isVegetarian, setIsVegetarian] = useState(false);
 
-	const onGlutenFreeChange = (val) => setIsGlutenFree(val);
-	const onLactoseFreeChange = (val) => setIsLactoseFree(val);
-	const onVeganChange = (val) => setIsVegan(val);
-	const onVegetarianChange = (val) => setIsVegetarian(val);
-
 	const window = useWindowDimensions();
 	const vWidth = window.width;
-	const vHeight = window.height;
+
+	useEffect(() => {
+		navigation.setParams({ FUNCTION_saveSettings: saveSettings });
+	}, [isGlutenFree, isLactoseFree, isVegan, isVegetarian]);
+
+	const saveSettings = () => {
+		const settings = {
+			isGlutenFree: isGlutenFree,
+			isLactoseFree: isLactoseFree,
+			isVegan: isVegan,
+			isVegetarian: isVegetarian,
+		};
+		console.log("About to save: ...", settings);
+	};
 
 	const styles = StyleSheet.create({
 		screen: {
@@ -30,6 +46,9 @@ const FiltersScreen = (props) => {
 			borderWidth: 0.25,
 			borderRadius: 6,
 			borderColor: Theme.cancelColor,
+		},
+		buttonWrapper: {
+			width: vWidth * 0.7,
 		},
 	});
 
@@ -43,26 +62,31 @@ const FiltersScreen = (props) => {
 					style={styles.switchWrapper}
 					label="Gluten Free"
 					initialValue={isGlutenFree}
-					onValueChange={onGlutenFreeChange}
+					onValueChange={setIsGlutenFree}
 				></LabeledSwitch>
 				<LabeledSwitch
 					style={styles.switchWrapper}
 					label="Lactose Free"
 					initialValue={isLactoseFree}
-					onValueChange={onLactoseFreeChange}
+					onValueChange={setIsLactoseFree}
 				></LabeledSwitch>
 				<LabeledSwitch
 					style={styles.switchWrapper}
 					label="Vegan"
 					initialValue={isVegan}
-					onValueChange={onVeganChange}
+					onValueChange={setIsVegan}
 				></LabeledSwitch>
 				<LabeledSwitch
 					style={styles.switchWrapper}
 					label="Vegetarian"
 					initialValue={isVegetarian}
-					onValueChange={onVegetarianChange}
+					onValueChange={setIsVegetarian}
 				></LabeledSwitch>
+			</View>
+			<View style={ThemeStyles.box1}>
+				<View style={styles.buttonWrapper}>
+					<ThemeButton title="Save Changes" onPress={() => saveSettings()} />
+				</View>
 			</View>
 		</View>
 	);
@@ -73,6 +97,19 @@ FiltersScreen.navigationOptions = ({ navigation }) => {
 		title: "Settings",
 		headerLeft: () => {
 			return <ToggleMenuDrawer navigation={navigation} />;
+		},
+		headerRight: () => {
+			return (
+				<MaterialHeaderButtons>
+					<ThemeButton
+						title="Save"
+						onPress={() => {
+							const saveSettings = navigation.getParam("FUNCTION_saveSettings");
+							saveSettings();
+						}}
+					/>
+				</MaterialHeaderButtons>
+			);
 		},
 	};
 };
