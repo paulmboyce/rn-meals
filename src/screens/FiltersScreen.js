@@ -22,11 +22,7 @@ const FiltersScreen = ({ navigation }) => {
 	const window = useWindowDimensions();
 	const vWidth = window.width;
 
-	useEffect(() => {
-		navigation.setParams({ FUNCTION_saveSettings: saveSettings });
-	}, [isGlutenFree, isLactoseFree, isVegan, isVegetarian]);
-
-	const saveSettings = () => {
+	const saveSettings = React.useCallback(() => {
 		const settings = {
 			isGlutenFree: isGlutenFree,
 			isLactoseFree: isLactoseFree,
@@ -34,7 +30,16 @@ const FiltersScreen = ({ navigation }) => {
 			isVegetarian: isVegetarian,
 		};
 		console.log("About to save: ...", settings);
-	};
+	}, [isGlutenFree, isLactoseFree, isVegan, isVegetarian]);
+
+	/**
+	 * NOTE: For this Effect to work correctly, it must
+	 * be AFTER getSettings, so useEffect sees the new
+	 * version of getSettings on a render.
+	 */
+	useEffect(() => {
+		navigation.setParams({ FUNCTION_saveSettings: saveSettings });
+	}, [saveSettings]);
 
 	const styles = StyleSheet.create({
 		screen: {
@@ -85,7 +90,7 @@ const FiltersScreen = ({ navigation }) => {
 			</View>
 			<View style={ThemeStyles.box1}>
 				<View style={styles.buttonWrapper}>
-					<ThemeButton title="Save Changes" onPress={() => saveSettings()} />
+					<ThemeButton title="Save Changes" onPress={saveSettings} />
 				</View>
 			</View>
 		</View>
