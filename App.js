@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import MealsNavigator from "./src/navigation/MealsNavigator";
 import { settingsReducer } from "./src/redux/reducers/settingsReducer";
 import { mealsReducer } from "./src/redux/reducers/mealsReducer";
+import { categoriesReducer } from "./src/redux/reducers/categoriesReducer";
 import { fetchAssets } from "./src/utils/init";
 
 export default function App() {
@@ -31,6 +32,7 @@ export default function App() {
 				combineReducers({
 					settings: settingsReducer,
 					meals: mealsReducer,
+					categories: categoriesReducer,
 				})
 			)}
 		>

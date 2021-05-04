@@ -1,13 +1,13 @@
 import React from "react";
 import { View, FlatList, useWindowDimensions } from "react-native";
+import { connect } from "react-redux";
 import { Item } from "react-navigation-header-buttons";
 
 import { ThemeStyles } from "../styles/Theme";
-import { CATEGORIES } from "../data/categories";
 import GridDisplay from "../components/GridDisplay";
 import ToggleMenuDrawer from "../navigation/ToggleMenuDrawer";
 
-const CategoriesScreen = ({ navigation }) => {
+const CategoriesScreen = ({ navigation, allCategories }) => {
 	const window = useWindowDimensions();
 
 	const renderCategory = ({ index, item }) => {
@@ -19,6 +19,7 @@ const CategoriesScreen = ({ navigation }) => {
 				routeName="CategoryMeals"
 				routeParams={{
 					categoryId: item.categoryId,
+					categoryName: item.name,
 				}}
 			/>
 		);
@@ -27,7 +28,7 @@ const CategoriesScreen = ({ navigation }) => {
 	return (
 		<View style={ThemeStyles.screen}>
 			<FlatList
-				data={CATEGORIES}
+				data={allCategories}
 				renderItem={renderCategory}
 				keyExtractor={(item) => item.id}
 				numColumns={2}
@@ -44,4 +45,8 @@ CategoriesScreen.navigationOptions = ({ navigation }) => {
 		},
 	};
 };
-export default CategoriesScreen;
+
+const mapStateToProps = (state) => {
+	return { allCategories: state.categories };
+};
+export default connect(mapStateToProps)(CategoriesScreen);

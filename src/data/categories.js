@@ -13,12 +13,4 @@ const CATEGORIES = [
 	new Category("c10", "Summer", "#47fced"),
 ];
 
-const getCategory = (categoryId) => {
-	const category = CATEGORIES.find((item) => item.categoryId === categoryId);
-	if (category === undefined) {
-		throw Error("Oops! Could not fnd category for categoryId: ", categoryId);
-	}
-	return category;
-};
-
-export { CATEGORIES, getCategory };
+export default CATEGORIES;

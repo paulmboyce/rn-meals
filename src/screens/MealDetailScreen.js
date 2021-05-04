@@ -14,13 +14,14 @@ import { ThemeStyles, Theme } from "../styles/Theme";
 import { getMealById, getFiltersForMeal } from "../data/mealsUtils";
 import MaterialHeaderButtons from "../navigation/HeaderButtons";
 
-const getMeal = (navigation, allMeals) => {
+const getMeal = (navigation) => {
 	const mealId = navigation.getParam("mealId");
+	const allMeals = navigation.getParam("allMeals");
 	return getMealById(allMeals, mealId);
 };
 
-const MealDetailScreen = ({ navigation, allMeals }) => {
-	const meal = getMeal(navigation, allMeals);
+const MealDetailScreen = ({ navigation }) => {
+	const meal = getMeal(navigation);
 	const filters = getFiltersForMeal(meal);
 
 	const window = useWindowDimensions();
@@ -143,7 +144,4 @@ MealDetailScreen.navigationOptions = ({ navigation }) => {
 	};
 };
 
-const mapStateToProps = (state) => {
-	return { allMeals: state.meals.allMeals };
-};
-export default connect(mapStateToProps)(MealDetailScreen);
+export default MealDetailScreen;

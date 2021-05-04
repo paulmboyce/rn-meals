@@ -1,9 +1,9 @@
 import React from "react";
 import { FlatList } from "react-native";
-
+import { connect } from "react-redux";
 import GridDisplayImage from "../components/GridDisplayImage";
 
-const renderMeals = (navigation, { index, item }) => {
+const renderMeals = (navigation, allMeals, { index, item }) => {
 	return (
 		<GridDisplayImage
 			navigation={navigation}
@@ -12,6 +12,7 @@ const renderMeals = (navigation, { index, item }) => {
 			routeName="MealDetail"
 			routeParams={{
 				mealId: item.id,
+				allMeals: allMeals,
 			}}
 		/>
 	);
@@ -23,14 +24,17 @@ const renderMeals = (navigation, { index, item }) => {
  * navigation as first param. FlatList will pass { index, item }
  * Also, null is passed as we are not trying to set 'this'.
  */
-const MealList = ({ mealsData, navigation }) => {
+const MealList = ({ mealsData, navigation, allMeals }) => {
 	return (
 		<FlatList
 			data={mealsData}
 			keyExtractor={(item) => item.id}
-			renderItem={renderMeals.bind(null, navigation)}
+			renderItem={renderMeals.bind(null, navigation, allMeals)}
 		/>
 	);
 };
 
-export default MealList;
+const mapStateToProps = (state) => {
+	return { allMeals: state.meals.allMeals };
+};
+export default connect(mapStateToProps)(MealList);

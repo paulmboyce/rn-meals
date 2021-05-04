@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View } from "react-native";
 import { connect } from "react-redux";
 
 import { ThemeStyles } from "../styles/Theme";
-import { getCategory } from "../data/categories";
 import { getMealsByCategory } from "../data/mealsUtils";
 import MealList from "../components/MealList";
 
@@ -18,13 +17,9 @@ const CategoryMealsScreen = ({ navigation, allMeals }) => {
 	);
 };
 
-CategoryMealsScreen.navigationOptions = (navProps) => {
-	const catId = navProps.navigation.getParam("categoryId");
-	const category = getCategory(catId);
-
-	return {
-		title: category.name,
-	};
+CategoryMealsScreen.navigationOptions = ({ navigation }) => {
+	const title = navigation.getParam("categoryName");
+	return { title: title };
 };
 
 const mapStateToProps = (state) => {
