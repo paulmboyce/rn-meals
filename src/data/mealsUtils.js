@@ -10,8 +10,8 @@ const getMealsByCategory = (allMeals, categoryId) => {
 	return meals;
 };
 
-const getMealsByFilter = (filterName) => {
-	const meals = MEALS.filter((meal) => {
+const getMealsByFilter = (allMeals, filterName) => {
+	const meals = allMeals.filter((meal) => {
 		return meal[filterName] === true;
 	});
 	if (meals === undefined) {

@@ -1,14 +1,14 @@
 import React from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
-import { Item } from "react-navigation-header-buttons";
+import { View } from "react-native";
+import { connect } from "react-redux";
 
 import { ThemeStyles, Theme } from "../styles/Theme";
 import { getMealsByFilter } from "../data/mealsUtils";
 import MealList from "../components/MealList";
 import ToggleMenuDrawer from "../navigation/ToggleMenuDrawer";
 
-const FavoritesScreen = ({ navigation }) => {
-	const mealFavorites = getMealsByFilter("isFavorite");
+const FavoritesScreen = ({ navigation, allMeals }) => {
+	const mealFavorites = getMealsByFilter(allMeals, "isFavorite");
 
 	return (
 		<View style={ThemeStyles.screen}>
@@ -26,4 +26,7 @@ FavoritesScreen.navigationOptions = ({ navigation }) => {
 	};
 };
 
-export default FavoritesScreen;
+const mapStateToProps = (state) => {
+	return { allMeals: state.meals.allMeals };
+};
+export default connect(mapStateToProps)(FavoritesScreen);
