@@ -7,16 +7,17 @@ import {
 } from "../../data/mealsUtils";
 
 const defaultMeals = {
-	meals: MEALS,
+	allMeals: MEALS,
 	categoryMeals: [],
 	filteredMeals: [],
 	favoriteMeals: [],
 };
 
 const mealsReducer = (oldState = defaultMeals, action) => {
+	console.log("ENTERED: mealsReducer()..");
 	const { type, payload } = action;
 	if (type === "SOME ACTION TYPE") {
-		console.log("REDUCING SAVE_SETTINGS: ", payload);
+		console.log("REDUCING MEALS: ", payload);
 		return { ...oldState, ...payload.settings };
 	}
 	return oldState;

@@ -1,7 +1,7 @@
 import { MEALS } from "./meals";
 
-const getMealsByCategory = (categoryId) => {
-	const meals = MEALS.filter((meal) => {
+const getMealsByCategory = (allMeals, categoryId) => {
+	const meals = allMeals.filter((meal) => {
 		return meal.categoryIds.includes(categoryId);
 	});
 	if (meals === undefined) {
