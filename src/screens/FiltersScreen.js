@@ -1,23 +1,20 @@
 import React, { useState, useEffect } from "react";
-import {
-	View,
-	Text,
-	StyleSheet,
-	useWindowDimensions,
-	Button,
-} from "react-native";
+import { View, Text, StyleSheet, useWindowDimensions } from "react-native";
+import { connect } from "react-redux";
 
 import ToggleMenuDrawer from "../navigation/ToggleMenuDrawer";
 import { ThemeStyles, Theme } from "../styles/Theme";
 import LabeledSwitch from "../components/LabeledSwitch";
 import ThemeButton from "../components/ThemeButton";
 import MaterialHeaderButtons from "../navigation/HeaderButtons";
+import { saveSettingsAction } from "../redux/actions";
 
-const FiltersScreen = ({ navigation }) => {
-	const [isGlutenFree, setIsGlutenFree] = useState(false);
-	const [isLactoseFree, setIsLactoseFree] = useState(false);
-	const [isVegan, setIsVegan] = useState(false);
-	const [isVegetarian, setIsVegetarian] = useState(false);
+const FiltersScreen = (props) => {
+	const { navigation, dispatch } = props;
+	const [isGlutenFree, setIsGlutenFree] = useState(props.isGlutenFree);
+	const [isLactoseFree, setIsLactoseFree] = useState(props.isLactoseFree);
+	const [isVegan, setIsVegan] = useState(props.isVegan);
+	const [isVegetarian, setIsVegetarian] = useState(props.isVegetarian);
 
 	const window = useWindowDimensions();
 	const vWidth = window.width;
@@ -29,7 +26,9 @@ const FiltersScreen = ({ navigation }) => {
 			isVegan: isVegan,
 			isVegetarian: isVegetarian,
 		};
-		console.log("About to save: ...", settings);
+
+		console.log("About to dispatch SAVE_SETTINGS action: ...", settings);
+		dispatch(saveSettingsAction(settings));
 	}, [isGlutenFree, isLactoseFree, isVegan, isVegetarian]);
 
 	/**
@@ -119,4 +118,13 @@ FiltersScreen.navigationOptions = ({ navigation }) => {
 	};
 };
 
-export default FiltersScreen;
+const mapStateToProps = ({ settings }) => {
+	return {
+		isGlutenFree: settings.isGlutenFree,
+		isLactoseFree: settings.isLactoseFree,
+		isVegan: settings.isVegan,
+		isVegetarian: settings.isVegetarian,
+	};
+};
+
+export default connect(mapStateToProps)(FiltersScreen);

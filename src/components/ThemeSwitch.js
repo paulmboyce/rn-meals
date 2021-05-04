@@ -3,13 +3,13 @@ import { Switch } from "react-native";
 
 import { Theme } from "../styles/Theme";
 
-const ThemeSwitch = (props) => {
+const ThemeSwitch = ({ initialValue, onValueChange }) => {
 	const [isEnabled, setIsEnabled] = useState(
-		props.initialValue ? props.value : false
+		initialValue ? initialValue : false
 	);
 	const toggleSwitch = (val) => {
 		setIsEnabled(val);
-		props.onValueChange(val);
+		onValueChange(val);
 	};
 
 	return (

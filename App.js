@@ -1,12 +1,13 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { StyleSheet, Image } from "react-native";
 import AppLoading from "expo-app-loading";
 import { loadAsync as loadFontsAsync } from "expo-font";
-import { Asset } from "expo-asset";
+import { createStore, combineReducers } from "redux";
+import { Provider } from "react-redux";
 
 import MealsNavigator from "./src/navigation/MealsNavigator";
 import { getImageUrls } from "./src/data/meals";
+import { settingsReducer } from "./src/redux/reducers";
 
 const fetchAssets = () => {
 	return Promise.all([fetchFonts(), ...fetchOnlineImages()]);
@@ -42,7 +43,17 @@ export default function App() {
 		);
 	}
 
-	return <MealsNavigator />;
+	return (
+		<Provider
+			store={createStore(
+				combineReducers({
+					settings: settingsReducer,
+				})
+			)}
+		>
+			<MealsNavigator />
+		</Provider>
+	);
 }
 
 const styles = StyleSheet.create({
