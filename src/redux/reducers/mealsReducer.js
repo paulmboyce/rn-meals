@@ -15,7 +15,7 @@ const defaultMeals = {
 
 const mealsReducer = (oldState = defaultMeals, action) => {
 	const { type, payload } = action;
-	if (type === SAVE_SETTINGS) {
+	if (type === "SOME ACTION TYPE") {
 		console.log("REDUCING SAVE_SETTINGS: ", payload);
 		return { ...oldState, ...payload.settings };
 	}

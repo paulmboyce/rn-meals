@@ -8,9 +8,8 @@ import { FlatList } from "react-native-gesture-handler";
 import GridDisplayImage from "../components/GridDisplayImage";
 import MealList from "../components/MealList";
 
-const CategoryMealsScreen = ({ navigation }) => {
+const CategoryMealsScreen = ({ navigation, meals }) => {
 	const catId = navigation.getParam("categoryId");
-	const category = getCategory(catId);
 	const mealsInCategory = getMealsByCategory(catId);
 
 	return (

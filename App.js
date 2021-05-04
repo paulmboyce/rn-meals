@@ -5,7 +5,8 @@ import { createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
 
 import MealsNavigator from "./src/navigation/MealsNavigator";
-import { settingsReducer } from "./src/redux/reducers/settings";
+import { settingsReducer } from "./src/redux/reducers/settingsReducer";
+import { mealsReducer } from "./src/redux/reducers/mealsReducer";
 import { fetchAssets } from "./src/utils/init";
 
 export default function App() {
@@ -29,6 +30,7 @@ export default function App() {
 			store={createStore(
 				combineReducers({
 					settings: settingsReducer,
+					meals: mealsReducer,
 				})
 			)}
 		>
