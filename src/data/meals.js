@@ -1,55 +1,5 @@
 import Meal from "../models/Meal";
 
-const getMealsByCategory = (categoryId) => {
-	const meals = MEALS.filter((meal) => {
-		return meal.categoryIds.includes(categoryId);
-	});
-	if (meals === undefined) {
-		throw Error("Oops! Could not fnd meals for categoryId: ", categoryId);
-	}
-	return meals;
-};
-
-const getMealsByFilter = (filterName) => {
-	const meals = MEALS.filter((meal) => {
-		return meal[filterName] === true;
-	});
-	if (meals === undefined) {
-		throw Error("Oops! Could not fnd meals for: ", filterName);
-	}
-	return meals;
-};
-
-const getMealById = (mealId) => {
-	const meal = MEALS.find((meal) => {
-		return meal.id === mealId;
-	});
-	if (meal === undefined) {
-		throw Error("Oops! Could not find meal for mealId: ", mealId);
-	}
-	return meal;
-};
-
-const getImageUrls = () => {
-	const imageUrls = MEALS.map((meal) => {
-		return meal.imageUrl;
-	});
-	if (imageUrls === undefined) {
-		throw Error("Oops! Could not find images");
-	}
-	return imageUrls;
-};
-
-const getFiltersForMeal = (meal) => {
-	const filters = [
-		{ name: "isGlutenFree", value: meal.isGlutenFree },
-		{ name: "isLactoseFree", value: meal.isLactoseFree },
-		{ name: "isVegan", value: meal.isVegan },
-		{ name: "isVegetarian", value: meal.isVegetarian },
-	];
-	return filters;
-};
-
 const MEALS = [
 	new Meal(
 		"m1",
@@ -381,11 +331,4 @@ const MEALS = [
 		false
 	),
 ];
-export {
-	MEALS,
-	getMealsByCategory,
-	getMealById,
-	getFiltersForMeal,
-	getMealsByFilter,
-	getImageUrls,
-};
+export { MEALS };

@@ -10,7 +10,7 @@ import {
 import { Item } from "react-navigation-header-buttons";
 
 import { ThemeStyles, Theme } from "../styles/Theme";
-import { getMealById, getFiltersForMeal } from "../data/meals";
+import { getMealById, getFiltersForMeal } from "../data/mealsUtils";
 import MaterialHeaderButtons from "../navigation/HeaderButtons";
 
 const getMeal = (navigation) => {

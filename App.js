@@ -1,21 +1,21 @@
 import React, { useState } from "react";
-import { StyleSheet, Image } from "react-native";
+import { StyleSheet, Image, Text, View } from "react-native";
 import AppLoading from "expo-app-loading";
 import { loadAsync as loadFontsAsync } from "expo-font";
 import { createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
 
 import MealsNavigator from "./src/navigation/MealsNavigator";
-import { getImageUrls } from "./src/data/meals";
-import { settingsReducer } from "./src/redux/reducers";
+import { getImageUrls } from "./src/data/mealsUtils";
+import { settingsReducer } from "./src/redux/reducers/settings";
 
 const fetchAssets = () => {
 	return Promise.all([fetchFonts(), ...fetchOnlineImages()]);
 };
 
-const fetchFonts = () => {
+const fetchFonts = async () => {
 	console.log("Fetching fonts...");
-	return loadFontsAsync({
+	return await loadFontsAsync({
 		OpenSans: require("./assets/fonts/OpenSans-Regular.ttf"),
 		OpenSansBold: require("./assets/fonts/OpenSans-Bold.ttf"),
 	});
@@ -24,7 +24,7 @@ const fetchFonts = () => {
 const fetchOnlineImages = () => {
 	console.log("Pre-loading images...");
 	const imageUrls = getImageUrls();
-	return imageUrls.map((url) => Image.prefetch(url));
+	return imageUrls.map(async (url) => await Image.prefetch(url));
 };
 
 export default function App() {
@@ -35,13 +35,20 @@ export default function App() {
 			<AppLoading
 				startAsync={fetchAssets}
 				onFinish={() => {
+					console.log("Starting App, setting isReady [TRUE]...");
 					setIsReady(true);
-					console.log("Starting App...");
 				}}
 				onError={(err) => console.log(err)}
 			/>
 		);
 	}
+	/* FOR TEST APPLOADING..
+	return (
+		<View style={styles.container}>
+			<Text style={{ fontFamily: "OpenSans" }}>Hello</Text>
+		</View>
+	);
+	*/
 
 	return (
 		<Provider

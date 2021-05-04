@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Button } from "react-native";
 import { Item } from "react-navigation-header-buttons";
 
 import { ThemeStyles, Theme } from "../styles/Theme";
-import { getMealsByFilter } from "../data/meals";
+import { getMealsByFilter } from "../data/mealsUtils";
 import MealList from "../components/MealList";
 import ToggleMenuDrawer from "../navigation/ToggleMenuDrawer";
 

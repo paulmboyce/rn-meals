@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Button } from "react-native";
 
 import { ThemeStyles } from "../styles/Theme";
 import { getCategory } from "../data/categories";
-import { getMealsByCategory } from "../data/meals";
+import { getMealsByCategory } from "../data/mealsUtils";
 import { FlatList } from "react-native-gesture-handler";
 import GridDisplayImage from "../components/GridDisplayImage";
 import MealList from "../components/MealList";
