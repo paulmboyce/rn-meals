@@ -20,8 +20,8 @@ const getMealsByFilter = (filterName) => {
 	return meals;
 };
 
-const getMealById = (mealId) => {
-	const meal = MEALS.find((meal) => {
+const getMealById = (allMeals, mealId) => {
+	const meal = allMeals.find((meal) => {
 		return meal.id === mealId;
 	});
 	if (meal === undefined) {

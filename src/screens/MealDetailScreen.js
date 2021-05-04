@@ -7,19 +7,20 @@ import {
 	Image,
 	ScrollView,
 } from "react-native";
+import { connect } from "react-redux";
 import { Item } from "react-navigation-header-buttons";
 
 import { ThemeStyles, Theme } from "../styles/Theme";
 import { getMealById, getFiltersForMeal } from "../data/mealsUtils";
 import MaterialHeaderButtons from "../navigation/HeaderButtons";
 
-const getMeal = (navigation) => {
+const getMeal = (navigation, allMeals) => {
 	const mealId = navigation.getParam("mealId");
-	return getMealById(mealId);
+	return getMealById(allMeals, mealId);
 };
 
-const MealDetailScreen = ({ navigation }) => {
-	const meal = getMeal(navigation);
+const MealDetailScreen = ({ navigation, allMeals }) => {
+	const meal = getMeal(navigation, allMeals);
 	const filters = getFiltersForMeal(meal);
 
 	const window = useWindowDimensions();
@@ -142,4 +143,7 @@ MealDetailScreen.navigationOptions = ({ navigation }) => {
 	};
 };
 
-export default MealDetailScreen;
+const mapStateToProps = (state) => {
+	return { allMeals: state.meals.allMeals };
+};
+export default connect(mapStateToProps)(MealDetailScreen);
