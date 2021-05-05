@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
 	View,
 	Text,
@@ -14,15 +14,27 @@ import { ThemeStyles, Theme } from "../styles/Theme";
 import { getMealById, getFiltersForMeal } from "../data/mealsUtils";
 import MaterialHeaderButtons from "../navigation/HeaderButtons";
 
-const getMeal = (navigation) => {
+const MealDetailScreen = ({ navigation, allMeals }) => {
 	const mealId = navigation.getParam("mealId");
-	const allMeals = navigation.getParam("allMeals");
-	return getMealById(allMeals, mealId);
-};
-
-const MealDetailScreen = ({ navigation }) => {
-	const meal = getMeal(navigation);
+	const meal = getMealById(allMeals, mealId);
 	const filters = getFiltersForMeal(meal);
+
+	/**
+	 * MealDetail screen runs from meal id and redux state
+	 * It is forced to find its Meal.Name
+	 * which causes more renders, but makes
+	 * component more self-contained.
+	 *
+	 * OPTIMISE for Speed(less renders):
+	 *  By getting mealName from parent (as navigation param) :
+	 * 	mealName: item.name,
+	 *
+	 * Nevertheless this useEffect pattern serves as "a" model for
+	 * passing data from Component to React Navigator.
+	 * */
+	useEffect(() => {
+		navigation.setParams({ mealName: meal.name });
+	}, []);
 
 	const window = useWindowDimensions();
 	const landScape = window.width > window.height;
@@ -126,10 +138,9 @@ const MealDetailScreen = ({ navigation }) => {
 };
 
 MealDetailScreen.navigationOptions = ({ navigation }) => {
-	const meal = getMeal(navigation);
-
+	const mealName = navigation.getParam("mealName");
 	return {
-		headerTitle: meal.name,
+		headerTitle: mealName ? mealName : "",
 		headerRight: () => {
 			return (
 				<MaterialHeaderButtons>
@@ -144,4 +155,7 @@ MealDetailScreen.navigationOptions = ({ navigation }) => {
 	};
 };
 
-export default MealDetailScreen;
+const mapStateToProps = (state) => {
+	return { allMeals: state.meals.allMeals };
+};
+export default connect(mapStateToProps)(MealDetailScreen);

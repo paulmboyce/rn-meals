@@ -12,7 +12,13 @@ const renderMeals = (navigation, allMeals, { index, item }) => {
 			routeName="MealDetail"
 			routeParams={{
 				mealId: item.id,
-				allMeals: allMeals,
+				/**
+				 * MealDetail screen is forced to find its Meal.Name
+				 * which causes more renders, but makes component
+				 * more self-contained.
+				 * OPTIMISE for Speed(less renders) BY PASSING MEAL NAME HERE:
+				 * 	mealName: item.name,
+				 * */
 			}}
 		/>
 	);
