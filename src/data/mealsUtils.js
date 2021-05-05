@@ -21,6 +21,8 @@ const getMealsByFilter = (allMeals, filterName) => {
 };
 
 const getMealById = (allMeals, mealId) => {
+	console.log("getMealById", allMeals.length, mealId);
+
 	const meal = allMeals.find((meal) => {
 		return meal.id === mealId;
 	});

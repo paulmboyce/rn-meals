@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import { connect } from "react-redux";
 
 import { ThemeStyles, Theme } from "../styles/Theme";
@@ -10,11 +10,14 @@ import ToggleMenuDrawer from "../navigation/ToggleMenuDrawer";
 const FavoritesScreen = ({ navigation, allMeals }) => {
 	const mealFavorites = getMealsByFilter(allMeals, "isFavorite");
 
-	return (
-		<View style={ThemeStyles.screen}>
-			<MealList mealsData={mealFavorites} navigation={navigation} />
-		</View>
-	);
+	const renderContent = () => {
+		if (mealFavorites && mealFavorites.length === 0) {
+			return <Text>You have not saved any favorites yet!</Text>;
+		}
+		return <MealList mealsData={mealFavorites} navigation={navigation} />;
+	};
+
+	return <View style={ThemeStyles.screen}>{renderContent()}</View>;
 };
 
 FavoritesScreen.navigationOptions = ({ navigation }) => {

@@ -13,8 +13,9 @@ import { Item } from "react-navigation-header-buttons";
 import { ThemeStyles, Theme } from "../styles/Theme";
 import { getMealById, getFiltersForMeal } from "../data/mealsUtils";
 import MaterialHeaderButtons from "../navigation/HeaderButtons";
+import { saveMealAction } from "../redux/actions";
 
-const MealDetailScreen = ({ navigation, allMeals }) => {
+const MealDetailScreen = ({ dispatch, navigation, allMeals }) => {
 	const mealId = navigation.getParam("mealId");
 	const meal = getMealById(allMeals, mealId);
 	const filters = getFiltersForMeal(meal);
@@ -34,6 +35,9 @@ const MealDetailScreen = ({ navigation, allMeals }) => {
 	 * */
 	useEffect(() => {
 		navigation.setParams({ mealName: meal.name });
+		navigation.setParams({ isFavorite: meal.isFavorite });
+		navigation.setParams({ meal });
+		navigation.setParams({ dispatch });
 	}, []);
 
 	const window = useWindowDimensions();
@@ -139,6 +143,10 @@ const MealDetailScreen = ({ navigation, allMeals }) => {
 
 MealDetailScreen.navigationOptions = ({ navigation }) => {
 	const mealName = navigation.getParam("mealName");
+	const isFavorite = navigation.getParam("isFavorite");
+	const meal = navigation.getParam("meal");
+	const dispatch = navigation.getParam("dispatch");
+
 	return {
 		headerTitle: mealName ? mealName : "",
 		headerRight: () => {
@@ -146,8 +154,13 @@ MealDetailScreen.navigationOptions = ({ navigation }) => {
 				<MaterialHeaderButtons>
 					<Item
 						title="Add Favorite"
-						iconName="star"
-						onPress={() => console.log("PRESSED favorite")}
+						iconName={isFavorite ? "star" : "star-outline"}
+						onPress={() => {
+							console.log("Add favrt meal=", navigation.getParam("mealId"));
+							navigation.setParams({ isFavorite: !isFavorite });
+							meal.isFavorite = !meal.isFavorite;
+							dispatch(saveMealAction(meal));
+						}}
 					/>
 				</MaterialHeaderButtons>
 			);
