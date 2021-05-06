@@ -6,7 +6,7 @@ import { ThemeStyles, Theme } from "../styles/Theme";
 import MealList from "../components/MealList";
 import ToggleMenuDrawer from "../navigation/ToggleMenuDrawer";
 
-const FavoritesScreen = ({ dispatch, navigation, favoriteMeals }) => {
+const FavoritesScreen = ({ navigation, favoriteMeals }) => {
 	const renderContent = () => {
 		if (favoriteMeals && favoriteMeals.length === 0) {
 			return <Text>You have not saved any favorites yet!</Text>;

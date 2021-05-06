@@ -141,10 +141,6 @@ const MealDetailScreen = ({ dispatch, navigation, meal, isFavorite }) => {
 MealDetailScreen.navigationOptions = ({ navigation }) => {
 	const meal = navigation.getParam("meal");
 	const isFavorite = navigation.getParam("isFavorite");
-	let icon = "star-outline";
-	if (isFavorite) {
-		icon = isFavorite ? "star" : "star-outline";
-	}
 
 	return {
 		headerTitle: meal ? meal.name : "",
@@ -153,7 +149,7 @@ MealDetailScreen.navigationOptions = ({ navigation }) => {
 				<MaterialHeaderButtons>
 					<Item
 						title="Add Favorite"
-						iconName={icon}
+						iconName={isFavorite ? "star" : "star-outline"}
 						onPress={() => {
 							const dispatch = navigation.getParam("dispatch");
 							const action = isFavorite
@@ -168,12 +164,17 @@ MealDetailScreen.navigationOptions = ({ navigation }) => {
 	};
 };
 
+const isFavorite = (favoriteMeals, mealId) => {
+	const found = favoriteMeals.find((fav) => fav.id === mealId);
+	return !!found;
+};
+
 const mapStateToProps = ({ meals }, ownProps) => {
 	const mealId = ownProps.navigation.getParam("mealId");
 	const meal = getMealById(meals.allMeals, mealId);
 	return {
 		meal: meal,
-		isFavorite: !!meals.favoriteMeals.find((fav) => fav.mealId === meal.mealId),
+		isFavorite: isFavorite(meals.favoriteMeals, mealId),
 	};
 };
 export default connect(mapStateToProps)(MealDetailScreen);

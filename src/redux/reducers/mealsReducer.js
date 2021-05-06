@@ -21,10 +21,11 @@ const mealsReducer = (oldState = defaultMeals, action) => {
 	if (type === ADD_FAVORITE) {
 		console.log("mealsReducer ADD_FAVORITE: ", payload.meal.name);
 		// The following takes 2 steps as state object contains many arrays.
-		oldState.favoriteMeals.push(payload.meal);
-		const favoriteMeals = [...oldState.favoriteMeals];
+		const newFavs = [...oldState.favoriteMeals, payload.meal];
+		console.log("NEW FAVS: ", newFavs.length);
+		const result = { ...oldState, ...{ favoriteMeals: newFavs } };
+		console.log("RESULT FAVS: ", result.favoriteMeals.length);
 
-		const result = { ...oldState, ...{ favoriteMeals: favoriteMeals } };
 		return result;
 	}
 	if (type === DELETE_FAVORITE) {
@@ -34,6 +35,7 @@ const mealsReducer = (oldState = defaultMeals, action) => {
 			(meal) => meal.id !== payload.meal.id
 		);
 		const result = { ...oldState, ...{ favoriteMeals: favoriteMeals } };
+		console.log("RESULT FAVS: ", result.favoriteMeals.length);
 		return result;
 	}
 
