@@ -19,8 +19,8 @@ import {
 	deleteFavoriteAction,
 } from "../redux/actions";
 
-const MealDetailScreen = ({ dispatch, navigation, allMeals, meal }) => {
-	console.log("RENDER: MealDetailScreen, meal: ", meal.name, meal.isFavorite);
+const MealDetailScreen = ({ dispatch, navigation, meal, isFavorite }) => {
+	console.log("RENDER: MealDetailScreen, meal: ", meal.name, isFavorite);
 	const filters = getFiltersForMeal(meal);
 
 	/**
@@ -38,13 +38,14 @@ const MealDetailScreen = ({ dispatch, navigation, allMeals, meal }) => {
 	 * */
 	useEffect(() => {
 		console.log(
-			"useEffect: Passing meal|dispatch to nav. Meal: ",
+			"useEffect(): **isFavorite CHANGED! ** Passing meal|dispatch to nav. Meal: ",
 			meal.name,
-			meal.isFavorite
+			isFavorite
 		);
 		navigation.setParams({ meal });
+		navigation.setParams({ isFavorite });
 		navigation.setParams({ dispatch });
-	}, [meal.isFavorite]);
+	}, [isFavorite]);
 
 	const window = useWindowDimensions();
 	const landScape = window.width > window.height;
@@ -149,11 +150,12 @@ const MealDetailScreen = ({ dispatch, navigation, allMeals, meal }) => {
 
 MealDetailScreen.navigationOptions = ({ navigation }) => {
 	const meal = navigation.getParam("meal");
+	const isFavorite = navigation.getParam("isFavorite");
 	const dispatch = navigation.getParam("dispatch");
 	let icon = "star-outline";
-	if (meal) {
-		console.log("NAV: navigationOptions, meal: ", meal.name, meal.isFavorite);
-		icon = meal && meal.isFavorite === true ? "star" : "star-outline";
+	if (isFavorite) {
+		console.log("NAV: navigationOptions, meal: ", meal.name, isFavorite);
+		icon = isFavorite === true ? "star" : "star-outline";
 	} else {
 		console.log("NAV: meal not arrived yet: ", navigation.state.params);
 	}
@@ -170,7 +172,7 @@ MealDetailScreen.navigationOptions = ({ navigation }) => {
 						onPress={() => {
 							console.log("Add favrt meal=", navigation.getParam("mealId"));
 							const action =
-								meal.isFavorite === true
+								isFavorite === true
 									? deleteFavoriteAction(meal)
 									: addFavoriteAction(meal);
 							dispatch(action);
@@ -186,9 +188,10 @@ MealDetailScreen.navigationOptions = ({ navigation }) => {
 
 const mapStateToProps = ({ meals }, ownProps) => {
 	const mealId = ownProps.navigation.getParam("mealId");
+	const meal = getMealById(meals.allMeals, mealId);
 	return {
-		meal: getMealById(meals.allMeals, mealId),
-		allMeals: meals.allMeals,
+		meal: meal,
+		isFavorite: meal.isFavorite,
 	};
 };
 export default connect(mapStateToProps)(MealDetailScreen);
