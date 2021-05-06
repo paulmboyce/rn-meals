@@ -13,11 +13,7 @@ import { Item } from "react-navigation-header-buttons";
 import { ThemeStyles, Theme } from "../styles/Theme";
 import { getMealById, getFiltersForMeal } from "../data/mealsUtils";
 import MaterialHeaderButtons from "../navigation/HeaderButtons";
-import {
-	saveMealAction,
-	addFavoriteAction,
-	deleteFavoriteAction,
-} from "../redux/actions";
+import { addFavoriteAction, deleteFavoriteAction } from "../redux/actions";
 
 const MealDetailScreen = ({ dispatch, navigation, meal, isFavorite }) => {
 	console.log("RENDER: MealDetailScreen, meal: ", meal.name, isFavorite);
@@ -176,8 +172,6 @@ MealDetailScreen.navigationOptions = ({ navigation }) => {
 									? deleteFavoriteAction(meal)
 									: addFavoriteAction(meal);
 							dispatch(action);
-							meal.isFavorite = !meal.isFavorite;
-							dispatch(saveMealAction(meal));
 						}}
 					/>
 				</MaterialHeaderButtons>
@@ -191,7 +185,7 @@ const mapStateToProps = ({ meals }, ownProps) => {
 	const meal = getMealById(meals.allMeals, mealId);
 	return {
 		meal: meal,
-		isFavorite: meal.isFavorite,
+		isFavorite: !!meals.favoriteMeals.find((fav) => fav.mealId === meal.mealId),
 	};
 };
 export default connect(mapStateToProps)(MealDetailScreen);
