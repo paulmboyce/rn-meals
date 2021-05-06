@@ -1,5 +1,5 @@
 import { MEALS } from "../../data/meals";
-import { SAVE_MEAL, ADD_FAVORITE, DELETE_FAVORITE } from "../actions";
+import { ADD_FAVORITE, DELETE_FAVORITE } from "../actions";
 
 const defaultMeals = {
 	allMeals: MEALS,
@@ -25,7 +25,6 @@ const mealsReducer = (oldState = defaultMeals, action) => {
 		const favoriteMeals = [...oldState.favoriteMeals];
 
 		const result = { ...oldState, ...{ favoriteMeals: favoriteMeals } };
-		console.log("FAVORITES: ", result.favoriteMeals.length);
 		return result;
 	}
 	if (type === DELETE_FAVORITE) {

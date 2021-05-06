@@ -16,7 +16,6 @@ import MaterialHeaderButtons from "../navigation/HeaderButtons";
 import { addFavoriteAction, deleteFavoriteAction } from "../redux/actions";
 
 const MealDetailScreen = ({ dispatch, navigation, meal, isFavorite }) => {
-	console.log("RENDER: MealDetailScreen, meal: ", meal.name, isFavorite);
 	const filters = getFiltersForMeal(meal);
 
 	/**
@@ -33,11 +32,6 @@ const MealDetailScreen = ({ dispatch, navigation, meal, isFavorite }) => {
 	 * passing data from Component to React Navigator.
 	 * */
 	useEffect(() => {
-		console.log(
-			"useEffect(): **isFavorite CHANGED! ** Passing meal|dispatch to nav. Meal: ",
-			meal.name,
-			isFavorite
-		);
 		navigation.setParams({ meal });
 		navigation.setParams({ isFavorite });
 		navigation.setParams({ dispatch });
@@ -147,15 +141,10 @@ const MealDetailScreen = ({ dispatch, navigation, meal, isFavorite }) => {
 MealDetailScreen.navigationOptions = ({ navigation }) => {
 	const meal = navigation.getParam("meal");
 	const isFavorite = navigation.getParam("isFavorite");
-	const dispatch = navigation.getParam("dispatch");
 	let icon = "star-outline";
 	if (isFavorite) {
-		console.log("NAV: navigationOptions, meal: ", meal.name, isFavorite);
-		icon = isFavorite === true ? "star" : "star-outline";
-	} else {
-		console.log("NAV: meal not arrived yet: ", navigation.state.params);
+		icon = isFavorite ? "star" : "star-outline";
 	}
-	console.log("ICON:", icon);
 
 	return {
 		headerTitle: meal ? meal.name : "",
@@ -166,11 +155,10 @@ MealDetailScreen.navigationOptions = ({ navigation }) => {
 						title="Add Favorite"
 						iconName={icon}
 						onPress={() => {
-							console.log("Add favrt meal=", navigation.getParam("mealId"));
-							const action =
-								isFavorite === true
-									? deleteFavoriteAction(meal)
-									: addFavoriteAction(meal);
+							const dispatch = navigation.getParam("dispatch");
+							const action = isFavorite
+								? deleteFavoriteAction(meal)
+								: addFavoriteAction(meal);
 							dispatch(action);
 						}}
 					/>
