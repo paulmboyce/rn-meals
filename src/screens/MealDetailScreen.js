@@ -13,11 +13,14 @@ import { Item } from "react-navigation-header-buttons";
 import { ThemeStyles, Theme } from "../styles/Theme";
 import { getMealById, getFiltersForMeal } from "../data/mealsUtils";
 import MaterialHeaderButtons from "../navigation/HeaderButtons";
-import { saveMealAction } from "../redux/actions";
+import {
+	saveMealAction,
+	addFavoriteAction,
+	deleteFavoriteAction,
+} from "../redux/actions";
 
-const MealDetailScreen = ({ dispatch, navigation, allMeals }) => {
-	const mealId = navigation.getParam("mealId");
-	const meal = getMealById(allMeals, mealId);
+const MealDetailScreen = ({ dispatch, navigation, allMeals, meal }) => {
+	console.log("RENDER: MealDetailScreen, meal: ", meal.name, meal.isFavorite);
 	const filters = getFiltersForMeal(meal);
 
 	/**
@@ -34,11 +37,14 @@ const MealDetailScreen = ({ dispatch, navigation, allMeals }) => {
 	 * passing data from Component to React Navigator.
 	 * */
 	useEffect(() => {
-		navigation.setParams({ mealName: meal.name });
-		navigation.setParams({ isFavorite: meal.isFavorite });
+		console.log(
+			"useEffect: Passing meal|dispatch to nav. Meal: ",
+			meal.name,
+			meal.isFavorite
+		);
 		navigation.setParams({ meal });
 		navigation.setParams({ dispatch });
-	}, []);
+	}, [meal.isFavorite]);
 
 	const window = useWindowDimensions();
 	const landScape = window.width > window.height;
@@ -142,22 +148,32 @@ const MealDetailScreen = ({ dispatch, navigation, allMeals }) => {
 };
 
 MealDetailScreen.navigationOptions = ({ navigation }) => {
-	const mealName = navigation.getParam("mealName");
-	const isFavorite = navigation.getParam("isFavorite");
 	const meal = navigation.getParam("meal");
 	const dispatch = navigation.getParam("dispatch");
+	let icon = "star-outline";
+	if (meal) {
+		console.log("NAV: navigationOptions, meal: ", meal.name, meal.isFavorite);
+		icon = meal && meal.isFavorite === true ? "star" : "star-outline";
+	} else {
+		console.log("NAV: meal not arrived yet: ", navigation.state.params);
+	}
+	console.log("ICON:", icon);
 
 	return {
-		headerTitle: mealName ? mealName : "",
+		headerTitle: meal ? meal.name : "",
 		headerRight: () => {
 			return (
 				<MaterialHeaderButtons>
 					<Item
 						title="Add Favorite"
-						iconName={isFavorite ? "star" : "star-outline"}
+						iconName={icon}
 						onPress={() => {
 							console.log("Add favrt meal=", navigation.getParam("mealId"));
-							navigation.setParams({ isFavorite: !isFavorite });
+							const action =
+								meal.isFavorite === true
+									? deleteFavoriteAction(meal)
+									: addFavoriteAction(meal);
+							dispatch(action);
 							meal.isFavorite = !meal.isFavorite;
 							dispatch(saveMealAction(meal));
 						}}
@@ -168,7 +184,11 @@ MealDetailScreen.navigationOptions = ({ navigation }) => {
 	};
 };
 
-const mapStateToProps = (state) => {
-	return { allMeals: state.meals.allMeals };
+const mapStateToProps = ({ meals }, ownProps) => {
+	const mealId = ownProps.navigation.getParam("mealId");
+	return {
+		meal: getMealById(meals.allMeals, mealId),
+		allMeals: meals.allMeals,
+	};
 };
 export default connect(mapStateToProps)(MealDetailScreen);

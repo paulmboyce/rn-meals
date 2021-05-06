@@ -1,20 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text } from "react-native";
 import { connect } from "react-redux";
 
 import { ThemeStyles, Theme } from "../styles/Theme";
-import { getMealsByFilter } from "../data/mealsUtils";
 import MealList from "../components/MealList";
 import ToggleMenuDrawer from "../navigation/ToggleMenuDrawer";
+import { getFavoritesAction } from "../redux/actions";
 
-const FavoritesScreen = ({ navigation, allMeals }) => {
-	const mealFavorites = getMealsByFilter(allMeals, "isFavorite");
+const FavoritesScreen = ({ dispatch, navigation, favoriteMeals }) => {
+	console.log("RENDER: FavoritesScreen..");
 
 	const renderContent = () => {
-		if (mealFavorites && mealFavorites.length === 0) {
+		if (favoriteMeals && favoriteMeals.length === 0) {
 			return <Text>You have not saved any favorites yet!</Text>;
 		}
-		return <MealList mealsData={mealFavorites} navigation={navigation} />;
+		return <MealList mealsData={favoriteMeals} navigation={navigation} />;
 	};
 
 	return <View style={ThemeStyles.screen}>{renderContent()}</View>;
@@ -30,6 +30,6 @@ FavoritesScreen.navigationOptions = ({ navigation }) => {
 };
 
 const mapStateToProps = (state) => {
-	return { allMeals: state.meals.allMeals };
+	return { favoriteMeals: state.meals.favoriteMeals };
 };
 export default connect(mapStateToProps)(FavoritesScreen);
