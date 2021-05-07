@@ -22,7 +22,9 @@ const checkIsFavorite = (favoriteMeals, mealId) => {
 
 const MealDetailScreen = ({ navigation }) => {
 	const dispatch = useDispatch();
-	const { allMeals, favoriteMeals } = useSelector((state) => state.meals);
+	const allMeals = useSelector((state) => state.meals.allMeals);
+	const favoriteMeals = useSelector((state) => state.meals.favoriteMeals);
+
 	const mealId = navigation.getParam("mealId");
 
 	const meal = getMealById(allMeals, mealId);

@@ -8,7 +8,7 @@ import GridDisplay from "../components/GridDisplay";
 import ToggleMenuDrawer from "../navigation/ToggleMenuDrawer";
 
 const CategoriesScreen = ({ navigation }) => {
-	const { categories } = useSelector((state) => state);
+	const categories = useSelector((state) => state.categories);
 
 	const window = useWindowDimensions();
 

@@ -10,7 +10,7 @@ import MaterialHeaderButtons from "../navigation/HeaderButtons";
 import { saveSettingsAction, applyFiltersAction } from "../redux/actions";
 
 const FiltersScreen = ({ navigation }) => {
-	const { settings } = useSelector((state) => state);
+	const settings = useSelector((state) => state.settings);
 
 	const [isGlutenFree, setIsGlutenFree] = useState(settings.isGlutenFree);
 	const [isLactoseFree, setIsLactoseFree] = useState(settings.isLactoseFree);
