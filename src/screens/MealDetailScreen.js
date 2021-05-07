@@ -7,7 +7,7 @@ import {
 	Image,
 	ScrollView,
 } from "react-native";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Item } from "react-navigation-header-buttons";
 
 import { ThemeStyles, Theme } from "../styles/Theme";
@@ -15,7 +15,18 @@ import { getMealById, getFiltersForMeal } from "../data/mealsUtils";
 import MaterialHeaderButtons from "../navigation/HeaderButtons";
 import { addFavoriteAction, deleteFavoriteAction } from "../redux/actions";
 
-const MealDetailScreen = ({ dispatch, navigation, meal, isFavorite }) => {
+const checkIsFavorite = (favoriteMeals, mealId) => {
+	const found = favoriteMeals.find((fav) => fav.id === mealId);
+	return !!found;
+};
+
+const MealDetailScreen = ({ navigation }) => {
+	const dispatch = useDispatch();
+	const { allMeals, favoriteMeals } = useSelector((state) => state.meals);
+	const mealId = navigation.getParam("mealId");
+
+	const meal = getMealById(allMeals, mealId);
+	const isFavorite = checkIsFavorite(favoriteMeals, mealId);
 	const filters = getFiltersForMeal(meal);
 
 	/**
@@ -164,17 +175,4 @@ MealDetailScreen.navigationOptions = ({ navigation }) => {
 	};
 };
 
-const isFavorite = (favoriteMeals, mealId) => {
-	const found = favoriteMeals.find((fav) => fav.id === mealId);
-	return !!found;
-};
-
-const mapStateToProps = ({ meals }, ownProps) => {
-	const mealId = ownProps.navigation.getParam("mealId");
-	const meal = getMealById(meals.allMeals, mealId);
-	return {
-		meal: meal,
-		isFavorite: isFavorite(meals.favoriteMeals, mealId),
-	};
-};
-export default connect(mapStateToProps)(MealDetailScreen);
+export default MealDetailScreen;
