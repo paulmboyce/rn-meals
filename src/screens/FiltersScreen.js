@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, useWindowDimensions } from "react-native";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import ToggleMenuDrawer from "../navigation/ToggleMenuDrawer";
 import { ThemeStyles, Theme } from "../styles/Theme";
@@ -10,11 +10,22 @@ import MaterialHeaderButtons from "../navigation/HeaderButtons";
 import { saveSettingsAction, applyFiltersAction } from "../redux/actions";
 
 const FiltersScreen = (props) => {
-	const { navigation, dispatch } = props;
-	const [isGlutenFree, setIsGlutenFree] = useState(props.isGlutenFree);
-	const [isLactoseFree, setIsLactoseFree] = useState(props.isLactoseFree);
-	const [isVegan, setIsVegan] = useState(props.isVegan);
-	const [isVegetarian, setIsVegetarian] = useState(props.isVegetarian);
+	const { navigation } = props;
+	const dispatch = useDispatch();
+
+	const state = useSelector(({ settings }) => {
+		return {
+			isGlutenFree: settings.isGlutenFree,
+			isLactoseFree: settings.isLactoseFree,
+			isVegan: settings.isVegan,
+			isVegetarian: settings.isVegetarian,
+		};
+	});
+
+	const [isGlutenFree, setIsGlutenFree] = useState(state.isGlutenFree);
+	const [isLactoseFree, setIsLactoseFree] = useState(state.isLactoseFree);
+	const [isVegan, setIsVegan] = useState(state.isVegan);
+	const [isVegetarian, setIsVegetarian] = useState(state.isVegetarian);
 
 	const window = useWindowDimensions();
 	const vWidth = window.width;
@@ -118,13 +129,4 @@ FiltersScreen.navigationOptions = ({ navigation }) => {
 	};
 };
 
-const mapStateToProps = ({ settings }) => {
-	return {
-		isGlutenFree: settings.isGlutenFree,
-		isLactoseFree: settings.isLactoseFree,
-		isVegan: settings.isVegan,
-		isVegetarian: settings.isVegetarian,
-	};
-};
-
-export default connect(mapStateToProps)(FiltersScreen);
+export default FiltersScreen;
