@@ -19,14 +19,12 @@ const mealsReducer = (oldState = defaultMeals, action) => {
 	const { type, payload } = action;
 
 	if (type === ADD_FAVORITE) {
-		console.log("mealsReducer ADD_FAVORITE: ", payload.meal.name);
 		// The following takes 2 steps as state object contains many arrays.
 		const newFavs = [...oldState.favoriteMeals, payload.meal];
 		const result = { ...oldState, ...{ favoriteMeals: newFavs } };
 		return result;
 	}
 	if (type === DELETE_FAVORITE) {
-		console.log("mealsReducer DELETE_FAVORITE: ", payload.meal.name);
 		// The following takes 2 steps as state object contains many arrays.
 		const favoriteMeals = oldState.favoriteMeals.filter(
 			(meal) => meal.id !== payload.meal.id
@@ -37,43 +35,57 @@ const mealsReducer = (oldState = defaultMeals, action) => {
 
 	if (type === APPLY_FILTERS) {
 		const { filters } = payload;
-		console.log("mealsReducer APPLY_FILTERS: ", filters);
 
-		const filterValues = Object.values(filters);
-		console.log("filter values ", filterValues);
-		const allFalse = (accumulator, currentValue) => accumulator || currentValue;
-		const filtersOff = !!!filterValues.reduce(allFalse);
-		console.log("filtersOff: ", filtersOff);
-		if (filtersOff) {
-			return defaultMeals;
+		const showAllMeals = checkForFilters(filters);
+		if (showAllMeals) {
+			console.log(
+				"Filters turned OFF, showing all meals..",
+				oldState.allMeals.length
+			);
+			return {
+				favoriteMeals: [...oldState.favoriteMeals],
+				allMeals: [...MEALS],
+			};
 		}
 
+		let filteredMeals = [];
 		const filterNames = Object.keys(filters);
-		console.log("filterNames:", filterNames);
-		let filteredMeals = [...MEALS];
 		filterNames.forEach((filterName) => {
-			if (filters[filterName] === true) {
-				console.log("filterName: ", filterName);
-				filteredMeals = filteredMeals.filter((meal) => {
-					console.log(
-						"Processing meal ",
-						meal.name,
-						" - ",
-						meal[filterName],
-						" ..."
-					);
-					return meal[filterName] === filters[filterName];
-				});
-				console.log("NUM FILTERED MEALS: ", filterName, filteredMeals.length);
-			}
+			filteredMeals = [
+				...filteredMeals,
+				...getMealsByFilter(MEALS, filters, filterName),
+			];
 		});
-		console.log("NUM FILTERED MEALS (ALL): ", filteredMeals.length);
-
-		const result = { ...oldState, ...{ allMeals: filteredMeals } };
-		return result;
+		filteredMeals = dedupeArray(filteredMeals);
+		console.log("NUM FILTERED MEALS (ALL, de-duped): ", filteredMeals.length);
+		return { ...oldState, ...{ allMeals: filteredMeals } };
 	}
 
 	return oldState;
+};
+
+const dedupeArray = (someArray) => {
+	return [...new Set(someArray)];
+};
+const getMealsByFilter = (meals, filters, filterName) => {
+	let filteredMeals = [];
+	if (filters[filterName] === true) {
+		console.log(`------ Filter is ON: [${filterName}] --------------`);
+		filteredMeals = meals.filter((meal) => {
+			//			console.log(`[${filterName}] -> [${meal[filterName]}] for ${meal.name}`);
+			return meal[filterName] === filters[filterName];
+		});
+		console.log(`NUM ${filterName} meals: ${filteredMeals.length}`);
+	}
+	filteredMeals.forEach((meal) => console.log(`Including:  ${meal.name}`));
+
+	return filteredMeals;
+};
+
+const checkForFilters = (filterSettings) => {
+	const filterValues = Object.values(filterSettings);
+	const allFalse = (accumulator, currentValue) => accumulator || currentValue;
+	return !!!filterValues.reduce(allFalse);
 };
 
 export { mealsReducer };

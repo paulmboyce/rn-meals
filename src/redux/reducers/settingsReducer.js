@@ -10,7 +10,6 @@ const defaultSettings = {
 const settingsReducer = (oldState = defaultSettings, action) => {
 	const { type, payload } = action;
 	if (type === SAVE_SETTINGS) {
-		console.log("REDUCING SAVE_SETTINGS: ", payload);
 		return { ...oldState, ...payload.settings };
 	}
 	return oldState;

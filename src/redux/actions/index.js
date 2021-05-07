@@ -9,22 +9,18 @@ const saveSettingsAction = (settings) => {
 };
 
 const addFavoriteAction = (meal) => {
-	console.log("Dispatching addFavoriteAction: ", meal.name, meal.id);
 	return { type: ADD_FAVORITE, payload: { meal } };
 };
 
 const deleteFavoriteAction = (meal) => {
-	console.log("Dispatching deleteFavoriteAction: ", meal.name, meal.id);
 	return { type: DELETE_FAVORITE, payload: { meal } };
 };
 
 const getFavoritesAction = () => {
-	console.log("Dispatching getFavoritesAction... ");
 	return { type: GET_FAVORITES, payload: {} };
 };
 
 const applyFiltersAction = (filters) => {
-	console.log("Dispatching applyFiltersAction... ");
 	return { type: APPLY_FILTERS, payload: { filters } };
 };
 

@@ -27,7 +27,6 @@ const FiltersScreen = (props) => {
 			isVegetarian: isVegetarian,
 		};
 
-		console.log("About to dispatch SAVE_SETTINGS action: ...", settings);
 		dispatch(saveSettingsAction(settings));
 		dispatch(applyFiltersAction(settings));
 	}, [isGlutenFree, isLactoseFree, isVegan, isVegetarian]);
