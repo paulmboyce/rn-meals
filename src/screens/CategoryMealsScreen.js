@@ -7,10 +7,10 @@ import { getMealsByCategory } from "../data/mealsUtils";
 import MealList from "../components/MealList";
 
 const CategoryMealsScreen = ({ navigation }) => {
-	const allMeals = useSelector((state) => state.meals.allMeals);
+	const filteredMeals = useSelector((state) => state.meals.filteredMeals);
 
 	const catId = navigation.getParam("categoryId");
-	const mealsInCategory = getMealsByCategory(allMeals, catId);
+	const mealsInCategory = getMealsByCategory(filteredMeals, catId);
 
 	return (
 		<View style={ThemeStyles.screen}>

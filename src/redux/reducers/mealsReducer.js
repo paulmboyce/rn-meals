@@ -5,7 +5,7 @@ const defaultMeals = {
 	allMeals: MEALS,
 	favoriteMeals: [],
 	//	categoryMeals: [],
-	//	filteredMeals: [],
+	filteredMeals: MEALS,
 };
 
 const replaceItemById = (oldItem, newItem) => {
@@ -40,11 +40,12 @@ const mealsReducer = (oldState = defaultMeals, action) => {
 		if (showAllMeals) {
 			console.log(
 				"Filters turned OFF, showing all meals..",
-				oldState.allMeals.length
+				oldState.filteredMeals.length
 			);
 			return {
 				favoriteMeals: [...oldState.favoriteMeals],
 				allMeals: [...MEALS],
+				filteredMeals: [...MEALS],
 			};
 		}
 
@@ -58,7 +59,7 @@ const mealsReducer = (oldState = defaultMeals, action) => {
 		});
 		filteredMeals = dedupeArray(filteredMeals);
 		console.log("NUM FILTERED MEALS (ALL, de-duped): ", filteredMeals.length);
-		return { ...oldState, ...{ allMeals: filteredMeals } };
+		return { ...oldState, ...{ filteredMeals: filteredMeals } };
 	}
 
 	return oldState;
