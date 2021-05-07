@@ -7,7 +7,7 @@ import { ThemeStyles, Theme } from "../styles/Theme";
 import LabeledSwitch from "../components/LabeledSwitch";
 import ThemeButton from "../components/ThemeButton";
 import MaterialHeaderButtons from "../navigation/HeaderButtons";
-import { saveSettingsAction } from "../redux/actions";
+import { saveSettingsAction, applyFiltersAction } from "../redux/actions";
 
 const FiltersScreen = (props) => {
 	const { navigation, dispatch } = props;
@@ -29,6 +29,7 @@ const FiltersScreen = (props) => {
 
 		console.log("About to dispatch SAVE_SETTINGS action: ...", settings);
 		dispatch(saveSettingsAction(settings));
+		dispatch(applyFiltersAction(settings));
 	}, [isGlutenFree, isLactoseFree, isVegan, isVegetarian]);
 
 	/**

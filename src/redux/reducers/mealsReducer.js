@@ -1,5 +1,5 @@
 import { MEALS } from "../../data/meals";
-import { ADD_FAVORITE, DELETE_FAVORITE } from "../actions";
+import { ADD_FAVORITE, DELETE_FAVORITE, APPLY_FILTERS } from "../actions";
 
 const defaultMeals = {
 	allMeals: MEALS,
@@ -22,10 +22,7 @@ const mealsReducer = (oldState = defaultMeals, action) => {
 		console.log("mealsReducer ADD_FAVORITE: ", payload.meal.name);
 		// The following takes 2 steps as state object contains many arrays.
 		const newFavs = [...oldState.favoriteMeals, payload.meal];
-		console.log("NEW FAVS: ", newFavs.length);
 		const result = { ...oldState, ...{ favoriteMeals: newFavs } };
-		console.log("RESULT FAVS: ", result.favoriteMeals.length);
-
 		return result;
 	}
 	if (type === DELETE_FAVORITE) {
@@ -35,7 +32,44 @@ const mealsReducer = (oldState = defaultMeals, action) => {
 			(meal) => meal.id !== payload.meal.id
 		);
 		const result = { ...oldState, ...{ favoriteMeals: favoriteMeals } };
-		console.log("RESULT FAVS: ", result.favoriteMeals.length);
+		return result;
+	}
+
+	if (type === APPLY_FILTERS) {
+		const { filters } = payload;
+		console.log("mealsReducer APPLY_FILTERS: ", filters);
+
+		const filterValues = Object.values(filters);
+		console.log("filter values ", filterValues);
+		const allFalse = (accumulator, currentValue) => accumulator || currentValue;
+		const filtersOff = !!!filterValues.reduce(allFalse);
+		console.log("filtersOff: ", filtersOff);
+		if (filtersOff) {
+			return defaultMeals;
+		}
+
+		const filterNames = Object.keys(filters);
+		console.log("filterNames:", filterNames);
+		let filteredMeals = [...MEALS];
+		filterNames.forEach((filterName) => {
+			if (filters[filterName] === true) {
+				console.log("filterName: ", filterName);
+				filteredMeals = filteredMeals.filter((meal) => {
+					console.log(
+						"Processing meal ",
+						meal.name,
+						" - ",
+						meal[filterName],
+						" ..."
+					);
+					return meal[filterName] === filters[filterName];
+				});
+				console.log("NUM FILTERED MEALS: ", filterName, filteredMeals.length);
+			}
+		});
+		console.log("NUM FILTERED MEALS (ALL): ", filteredMeals.length);
+
+		const result = { ...oldState, ...{ allMeals: filteredMeals } };
 		return result;
 	}
 
