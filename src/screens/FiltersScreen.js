@@ -9,26 +9,17 @@ import ThemeButton from "../components/ThemeButton";
 import MaterialHeaderButtons from "../navigation/HeaderButtons";
 import { saveSettingsAction, applyFiltersAction } from "../redux/actions";
 
-const FiltersScreen = (props) => {
-	const { navigation } = props;
-	const dispatch = useDispatch();
+const FiltersScreen = ({ navigation }) => {
+	const { settings } = useSelector((state) => state);
 
-	const state = useSelector(({ settings }) => {
-		return {
-			isGlutenFree: settings.isGlutenFree,
-			isLactoseFree: settings.isLactoseFree,
-			isVegan: settings.isVegan,
-			isVegetarian: settings.isVegetarian,
-		};
-	});
-
-	const [isGlutenFree, setIsGlutenFree] = useState(state.isGlutenFree);
-	const [isLactoseFree, setIsLactoseFree] = useState(state.isLactoseFree);
-	const [isVegan, setIsVegan] = useState(state.isVegan);
-	const [isVegetarian, setIsVegetarian] = useState(state.isVegetarian);
+	const [isGlutenFree, setIsGlutenFree] = useState(settings.isGlutenFree);
+	const [isLactoseFree, setIsLactoseFree] = useState(settings.isLactoseFree);
+	const [isVegan, setIsVegan] = useState(settings.isVegan);
+	const [isVegetarian, setIsVegetarian] = useState(settings.isVegetarian);
 
 	const window = useWindowDimensions();
 	const vWidth = window.width;
+	const dispatch = useDispatch();
 
 	const saveSettings = React.useCallback(() => {
 		const settings = {

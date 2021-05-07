@@ -7,7 +7,7 @@ import MealList from "../components/MealList";
 import ToggleMenuDrawer from "../navigation/ToggleMenuDrawer";
 
 const FavoritesScreen = ({ navigation }) => {
-	const favoriteMeals = useSelector((state) => state.meals.favoriteMeals);
+	const { favoriteMeals } = useSelector((state) => state.meals);
 
 	const renderContent = () => {
 		if (favoriteMeals && favoriteMeals.length === 0) {

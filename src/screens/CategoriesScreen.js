@@ -8,9 +8,7 @@ import GridDisplay from "../components/GridDisplay";
 import ToggleMenuDrawer from "../navigation/ToggleMenuDrawer";
 
 const CategoriesScreen = ({ navigation }) => {
-	const allCategories = useSelector((state) => {
-		return state.categories;
-	});
+	const { categories } = useSelector((state) => state);
 
 	const window = useWindowDimensions();
 
@@ -32,7 +30,7 @@ const CategoriesScreen = ({ navigation }) => {
 	return (
 		<View style={ThemeStyles.screen}>
 			<FlatList
-				data={allCategories}
+				data={categories}
 				renderItem={renderCategory}
 				keyExtractor={(item) => item.id}
 				numColumns={2}
