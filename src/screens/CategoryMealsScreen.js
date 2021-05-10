@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import { useSelector } from "react-redux";
 
 import { ThemeStyles } from "../styles/Theme";
@@ -12,11 +12,17 @@ const CategoryMealsScreen = ({ navigation }) => {
 	const catId = navigation.getParam("categoryId");
 	const mealsInCategory = getMealsByCategory(filteredMeals, catId);
 
-	return (
-		<View style={ThemeStyles.screen}>
-			<MealList mealsData={mealsInCategory} navigation={navigation} />
-		</View>
-	);
+	const renderContent = () => {
+		if (mealsInCategory.length < 1) {
+			return (
+				<Text style={ThemeStyles.text}>
+					No meals found. Maybe check your settings?
+				</Text>
+			);
+		}
+		return <MealList mealsData={mealsInCategory} navigation={navigation} />;
+	};
+	return <View style={ThemeStyles.screen}>{renderContent()}</View>;
 };
 
 CategoryMealsScreen.navigationOptions = ({ navigation }) => {
